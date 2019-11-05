@@ -21,7 +21,7 @@ body{
     
 
     &__logo-img{
-        height: 100px;
+        height: 80px;
         padding: 5px;
     }
     
@@ -45,6 +45,29 @@ body{
         &-btn:hover{
             background-color: rgb(73, 143, 223);
             cursor: pointer;
+        }
+    }
+}
+
+.main{
+    background-color: rgba(255,255,255,0.5);
+    padding-top: 60px;
+    min-height: 100vh;
+    margin-top: 80px;
+    width: 100%;
+    
+    &__post{
+        padding: 20px 5px;
+        width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+        &-title{
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        &-paragraph{
+            font-size: 1.2rem;
+            text-align: justify;
         }
     }
 }
