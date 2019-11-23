@@ -1,0 +1,32 @@
+{
+  "name": "projekt-teleinformatyka",
+  "version": "1.0.0",
+  "description": "Projekt na zaliczenie przedmiotu systemy teleinformatyczne",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -c jsdoc.json",
+    "out": "jsdoc src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vulpie/teleinformatyka.git"
+  },
+  "author": "Wojtaś Filip, Dominik Trześniowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vulpie/teleinformatyka/issues"
+  },
+  "homepage": "https://github.com/Vulpie/teleinformatyka#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-docs": "^1.4.7",
+    "chalk": "^3.0.0",
+    "express": "^4.17.1",
+    "hbs": "^4.0.6",
+    "jsdoc": "^3.6.3",
+    "mongodb": "^3.3.4",
+    "mongoose": "^5.7.12",
+    "validator": "^12.1.0"
+  }
+}
