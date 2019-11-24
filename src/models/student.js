@@ -8,7 +8,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 /**
- * Schemat opisujacy studente
+ * Schemat opisujacy studenta
  * @constructor studentSchema
  * @property {string} name - Imie studenta (required,trim)
  * @property {string} album - Numer albumu studenta (required,trim,6-znaków,unique)

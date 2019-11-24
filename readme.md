@@ -23,6 +23,7 @@
 * bcrypt
 * jwtoken
 * hbs
+
 ---
 
 ## Dokumentacja wygenerowana za pomocą JSDoc

@@ -4,7 +4,7 @@ const express = require('express')
 const chalk = require('chalk')
 const studentRouter = require('./routers/student')
 const hbs = require('hbs')
-const bodyParser = require('body-parser')
+
 require('./db/mongoose')
 
 const app = express()
@@ -19,9 +19,8 @@ app.set('views',viewPath)
 hbs.registerPartials(partialPath)
 
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+
+app.use(express.urlencoded())
 
 app.use(express.static(publicDirectoryPath))
 
