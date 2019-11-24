@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+</head>
+
+<body>
+
+    {{>header}}
+    <div class="loginbox">
+        <img src="/img/avatar.png" class="loginbox__avatar-img">
+        <h1>Register Here</h1>
+        <form method="POST" action="/students">
+            <p>Name and Surename</p>
+            <input type="text" name="name" placeholder="Imie i nazwisko">
+            <p>Album Number</p>
+            <input type="text" name="album" placeholder="Numer albumu">
+            <p>E-mail</p>
+            <input type="text" name="email" placeholder="E-mail">
+            <p>Password</p>
+            <input type="password" name="password" placeholder="Hasło">
+            <p>Confirm Password</p>
+            <input type="password" name="" placeholder="Hasło">
+            <input type="submit" name="" value="Zarejestruj">
+        </form>
+    </div>
+
+    {{>footer}}
+</body>
+
+</html>

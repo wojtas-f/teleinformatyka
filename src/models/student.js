@@ -31,11 +31,9 @@ const studentSchema = new mongoose.Schema({
         trim: true,
         minlength: 6,
         maxlength: 6,
-        unique: true
     },
     email:{
         type: String,
-        unique: true,
         required: true,
         trim: true,
         lowercase: true,
