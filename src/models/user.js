@@ -41,9 +41,9 @@ const userSchema = new mongoose.Schema({
             if(!validator.isEmail(email_string)){
                 throw new Error('Invalid email')
             }
-            // if(!email_string.includes('stud.prz.edu.pl')){
-            //     throw new Error('This is not an email of the student')
-            // }
+            if(!email_string.includes('stud.prz.edu.pl') || !email.string.includes('prz.edu.pl')){
+                throw new Error('This is not an email of the student')
+            }
             
         }
     },

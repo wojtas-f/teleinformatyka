@@ -27,6 +27,7 @@
     "jsdoc": "^3.6.3",
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.12",
+    "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
     "validator": "^12.1.0"
   }
