@@ -28,3 +28,8 @@
 
 ## Dokumentacja wygenerowana za pomocą JSDoc
 <a href="https://www.npmjs.com/package/jsdoc">jsdoc/github</a>
+
+## Styl formatowania kodu
+* No semicolon
+* Single quote
+* No trailing comma

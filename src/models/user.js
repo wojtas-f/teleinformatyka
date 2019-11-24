@@ -1,24 +1,24 @@
 
 /**
- * Moduł opisuje schemat użytkownika o statusie studenta i zawiera listę dostępnych parametrów
- * @module StudentModel
+ * Moduł opisuje schemat użytkownika i zawiera listę dostępnych parametrów
+ * @module UserModel
  */
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 /**
- * Schemat opisujacy studenta
- * @constructor studentSchema
- * @property {string} name - Imie studenta (required,trim)
- * @property {string} album - Numer albumu studenta (required,trim,6-znaków,unique)
- * @property {string} email - Adres email studenta (required,unique,trim,lowercase) Musi zawierać stud.prz.edu.pl. Poprawnosć adresu sprawdzana z apomocą valdiatora
+ * Schemat opisujacy użytkownika
+ * @constructor userSchema
+ * @property {string} name - Imie użytkownika (required,trim)
+ * @property {string} album - Numer albumu użytkownika (required,trim,6-znaków,unique)
+ * @property {string} email - Adres email użytkownika (required,unique,trim,lowercase) Musi zawierać stud.prz.edu.pl. Poprawnosć adresu sprawdzana z apomocą valdiatora
  * @property {string} password - Hasło (required,minimum 11 znaków, nie mozę zawierać słów: admin, password lub 12345)
- * @property {number} age - Wiek studenta (default: 0, unrequired,positive number)
- * @property {string} status - Status studenta na uczelni
+ * @property {number} age - Wiek użytkownika (default: 0, unrequired,positive number)
+ * @property {string} status - Status użytkownika na uczelni
  */
 
-const studentSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -41,9 +41,9 @@ const studentSchema = new mongoose.Schema({
             if(!validator.isEmail(email_string)){
                 throw new Error('Invalid email')
             }
-            if(!email_string.includes('stud.prz.edu.pl')){
-                throw new Error('This is not an email of the student')
-            }
+            // if(!email_string.includes('stud.prz.edu.pl')){
+            //     throw new Error('This is not an email of the student')
+            // }
             
         }
     },
@@ -78,20 +78,20 @@ const studentSchema = new mongoose.Schema({
 
 /**
  * Middleware do szyfrowania hasła przed zapisaniem
- * @module StudentModel
- * @function PRE/save
+ * @module userModel
+ * @function pre/save
  * @async
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  * @param {Function} next - Funkcja next (Express middleware)
  */
-studentSchema.pre('save',async function(req,res,next){
-    const student = this
-    if(student.isModified('password')){
-        student.password = await bcrypt.hash(student.password, 8)
+userSchema.pre('save',async function(req,res,next){
+    const user = this
+    if(user.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8)
     }
     next()
 })
 
-const Student = mongoose.model('Student', studentSchema)
-module.exports = Student
+const User = mongoose.model('User', userSchema)
+module.exports = User

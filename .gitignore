@@ -3,3 +3,4 @@ style.scss
 node_modules
 jsdoc.json
 docs
+.prettierrc
