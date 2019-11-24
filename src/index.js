@@ -4,6 +4,7 @@ const express = require('express')
 const chalk = require('chalk')
 const userRouter = require('./routers/user')
 const pagesRouter = require('./routers/pages')
+const topicRouter = require('./routers/topic')
 const hbs = require('hbs')
 
 require('./db/mongoose')
@@ -22,13 +23,11 @@ hbs.registerPartials(partialPath)
 app.use(express.static(publicDirectoryPath))
 
 app.use(express.json())
-app.use(express.urlencoded(
-    { extended: true }
-))
+app.use(express.urlencoded({ extended: true }))
 
 app.use(userRouter)
 app.use(pagesRouter)
-
+app.use(topicRouter)
 
 app.listen(port, () =>
     console.log(chalk.green(`Server started on port ${port}`))

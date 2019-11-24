@@ -9,6 +9,7 @@ body {
   background-position: left bottom;
 }
 
+/* Heaer */
 .header {
   position: fixed;
   top: 0;
@@ -63,6 +64,7 @@ body {
   cursor: pointer;
 }
 
+/* Main */
 .main {
   background-color: rgba(255, 255, 255, 0.5);
   padding-top: 60px;
@@ -88,6 +90,7 @@ body {
   text-align: justify;
 }
 
+/* Footer */
 .footer {
   background-color: #003c82;
   width: 100%;
@@ -182,9 +185,18 @@ h1 {
   font-size: 22px;
 }
 
+h2 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
 .loginbox {
   width: 400px;
-  height: 580px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   border-radius: 2%;
   background: #3c4245;
   color: #fff;
@@ -205,6 +217,13 @@ h1 {
   position: fixed;
   top: -50px;
   left: calc(50% - 50px);
+}
+
+.loginbox__errorDisplay {
+  color: #b83131;
+  font-size: 1rem;
+  text-align: center;
+  padding: 15px 0;
 }
 
 .loginbox p {

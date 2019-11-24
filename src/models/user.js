@@ -1,4 +1,3 @@
-
 /**
  * Moduł opisuje schemat użytkownika i zawiera listę dostępnych parametrów
  * @module UserModel
@@ -19,32 +18,33 @@ const bcrypt = require('bcryptjs')
  */
 
 const userSchema = new mongoose.Schema({
-
     name: {
         type: String,
         required: true,
-        trim: true,
+        trim: true
     },
-    album:{
+    album: {
         type: Number,
         required: true,
         trim: true,
         minlength: 6,
-        maxlength: 6,
+        maxlength: 6
     },
-    email:{
+    email: {
         type: String,
         required: true,
         trim: true,
         lowercase: true,
-        validate(email_string){
-            if(!validator.isEmail(email_string)){
+        validate(email_string) {
+            if (!validator.isEmail(email_string)) {
                 throw new Error('Invalid email')
             }
-            if(!email_string.includes('stud.prz.edu.pl') && !email_string.includes('prz.edu.pl')){
+            if (
+                !email_string.includes('stud.prz.edu.pl') &&
+                !email_string.includes('prz.edu.pl')
+            ) {
                 throw new Error('This is not an university email')
             }
-            
         }
     },
     password: {
@@ -52,11 +52,14 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 11,
         trim: true,
-        validate(pswd){
-            if(pswd.toLowerCase().includes('password')){
+        validate(pswd) {
+            if (pswd.toLowerCase().includes('password')) {
                 throw new Error('Password cannot contain phrase "password"')
             }
-            if(pswd.toLowerCase().includes('admin')||pswd.toLowerCase().includes('12345')){
+            if (
+                pswd.toLowerCase().includes('admin') ||
+                pswd.toLowerCase().includes('12345')
+            ) {
                 throw new Error('WTF!!!')
             }
         }
@@ -64,8 +67,8 @@ const userSchema = new mongoose.Schema({
     age: {
         type: Number,
         default: 0,
-        validate(value){
-            if(value<0){
+        validate(value) {
+            if (value < 0) {
                 throw new Error('Age must be a positive number')
             }
         }
@@ -85,12 +88,15 @@ const userSchema = new mongoose.Schema({
  * @param {Object} res - Obiekt response (Express)
  * @param {Function} next - Funkcja next (Express middleware)
  */
-userSchema.pre('save',async function(req,res,next){
+userSchema.pre('save', async function(req, res, next) {
     const user = this
-    if(user.isModified('password')){
+    if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
     }
-    if(!user.email.includes('stud.prz.edu.pl') && user.email.includes('prz.edu.pl')){
+    if (
+        !user.email.includes('stud.prz.edu.pl') &&
+        user.email.includes('prz.edu.pl')
+    ) {
         user.status = 'promotor'
     }
     next()

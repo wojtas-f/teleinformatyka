@@ -1,5 +1,5 @@
 /**
- * Moduł zawiera endpointy związane z użytkownikiem
+ * Moduł zawiera endpointy użytkowników
  * @module UserRouter
  */
 
@@ -7,52 +7,53 @@ const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
 
-
 /**
- * Funkcja dodaje nowego użytkownika 
+ * Funkcja dodaje nowego użytkownika
  * @module UserRouter
  * @function post/users
  * @async
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.post('/users', async (req,res)=>{
-    console.log(req.body)
+router.post('/users', async (req, res) => {
     const user = new User(req.body)
     let msg
-    try{
+    try {
         await user.save()
-        if(user.status === 'student'){
+        if (user.status === 'student') {
             msg = 'Witam szanownego studenta'
         } else {
             msg = 'Witam Pana Promotora xD'
         }
-        res.render('welcome', {title: 'Witamy na naszej platformie',msg: msg, name: user.name})
-    } catch (e){
+        res.render('welcome', {
+            title: 'Witamy na naszej platformie',
+            msg: msg,
+            name: user.name
+        })
+    } catch (e) {
         res.status(400).send(e)
     }
 })
 
 /**
- * Funkcja zwraca listę wszystkich użytkowników 
+ * Funkcja zwraca listę wszystkich użytkowników
  * @module UserRouter
  * @function get/users/all
  * @async
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/users/all', async (req,res)=>{
+router.get('/users/all', async (req, res) => {
     try {
         const users = await User.find({})
-        if(!users){
+        if (!users) {
             return res.status(400).send()
         }
         res.send(users)
-    } catch (e){
+    } catch (e) {
         res.status(500).send()
     }
 })
-
 
 /**
  * Funkcja zwraca użytkownika o podanym ID
@@ -62,15 +63,15 @@ router.get('/users/all', async (req,res)=>{
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/users/:id', async (req,res)=>{
+router.get('/users/:id', async (req, res) => {
     const userID = req.params.id
-    try{
+    try {
         const user = await User.findById(userID)
-        if(!user){
+        if (!user) {
             return res.status(404).send()
         }
         res.send(user)
-    } catch (e){
+    } catch (e) {
         res.status(500).send()
     }
 })
