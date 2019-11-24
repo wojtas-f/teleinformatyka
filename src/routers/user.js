@@ -19,10 +19,15 @@ const router = new express.Router()
 router.post('/users', async (req,res)=>{
     console.log(req.body)
     const user = new User(req.body)
-
+    let msg
     try{
         await user.save()
-        res.status(201).send({user})
+        if(user.status === 'student'){
+            msg = 'Witam szanownego studenta'
+        } else {
+            msg = 'Witam Pana Promotora xD'
+        }
+        res.render('welcome', {title: 'Witamy na naszej platformie',msg: msg, name: user.name})
     } catch (e){
         res.status(400).send(e)
     }

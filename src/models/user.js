@@ -41,8 +41,8 @@ const userSchema = new mongoose.Schema({
             if(!validator.isEmail(email_string)){
                 throw new Error('Invalid email')
             }
-            if(!email_string.includes('stud.prz.edu.pl') || !email.string.includes('prz.edu.pl')){
-                throw new Error('This is not an email of the student')
+            if(!email_string.includes('stud.prz.edu.pl') && !email_string.includes('prz.edu.pl')){
+                throw new Error('This is not an university email')
             }
             
         }
@@ -89,6 +89,9 @@ userSchema.pre('save',async function(req,res,next){
     const user = this
     if(user.isModified('password')){
         user.password = await bcrypt.hash(user.password, 8)
+    }
+    if(!user.email.includes('stud.prz.edu.pl') && user.email.includes('prz.edu.pl')){
+        user.status = 'promotor'
     }
     next()
 })
