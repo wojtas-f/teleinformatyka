@@ -31,7 +31,10 @@ router.post('/users', async (req, res) => {
             name: user.name
         })
     } catch (e) {
-        res.status(400).send(e)
+        // res.status(400).send(e.errors.email.message)
+        res.render('register',{
+            error_msg: e.errors.email.message
+        })
     }
 })
 

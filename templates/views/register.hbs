@@ -18,7 +18,8 @@
     <div class="loginbox">
         <img src="/img/avatar.png" class="loginbox__avatar-img">
         <h1>Register Here</h1>
-        <div id="errorDisplay" class="loginbox__errorDisplay"></div>
+        <div id="errorDisplay" class="loginbox__errorDisplay">{{error_msg}}</div>
+        
         <form name="register_form" method="POST" action="/users" onsubmit="return validateRegisterForm()">
             <p>Imie i nazwisko</p>
             <input type="text" name="name" placeholder="Imie i nazwisko" required>
