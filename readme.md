@@ -15,22 +15,33 @@ Projekt wykonany na zaliczenie przedmiotu Systemy teleinformatyczne - Politechni
 
 ---
 
-### Technologie:
+### Technologie
+Projekt stworzony przy użyciu:
+* HTML
 * JavaScript / NodeJS / ExpressJS
 * CSS / Sass
 * mongoDB
 
-## Biblioteki / moduły:
-* validator
-* mongodb / mongoose
-* bcrypt
+## Biblioteki / moduły
+Moduły i paczki wykorzystane przy tworzeniu projektu
+* express 4.17.1
+* validator 12.1.0
+* mongodb 3.3.4
+* mongoose 5.7.12
+* bcrypt 2.4.3
 * jwtoken
-* hbs
+* handlebars 4.5.3
+* hbs 4.0.6
+* jsdoc 3.6.3
+* better-docs 1.4.7
 
+_Aktualizacja handlebars do wersi 4.5.3_
 ---
 
 ## Dokumentacja 
-...
+Dokumentacja projektu wykonana za pomocą JSDoc.
+
+PLACEHOLDER
 
 ## Styl formatowania kodu
 * No semicolon
