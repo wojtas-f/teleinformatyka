@@ -8,12 +8,24 @@ const Topic = require('../models/topic')
 const router = new express.Router()
 
 /**
- * To je funkcja
+ * @module TopicRouter
+ * @function post/topic
+ * @async
+ * @param {Object} req - Obiekt request (Express)
+ * @param {Object} res - Obiekt response (Express)
  */
 router.get('/list', async (req,res) =>{
     try {
         let list = await Topic.find({})
-        res.send(list)
+        // let resList = []
+        // let i=0
+        // list.forEach(element=>{
+        //     resList[i]=element.title
+        //     i++
+        // })
+        // i=0
+        //res.send(resList)
+        res.render('list', {topic: list})
     } catch (e) {
         res.status(500).send()
     }

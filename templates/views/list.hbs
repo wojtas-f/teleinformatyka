@@ -17,9 +17,27 @@
 <body>
 
     {{>header}}
-        <div class="main">
-        
-        </div>
+    <div class="main">
+
+        <table class="main__table">
+                <tr>
+                    <th>Index</th>
+                    <th>Tytuł</th>
+                    <th>Opis</th>
+                    <th>Poziom</th>
+                    <th>Status</th>
+                </tr>
+            {{#each topic}}
+                <tr>
+                    <td class="main__table-count"></td>
+                    <td>{{this.title}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.level}}</td>
+                    <td>{{this.reservationStatus}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
     {{>footer}}
 </body>
 

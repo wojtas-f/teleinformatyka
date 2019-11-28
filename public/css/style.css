@@ -107,6 +107,25 @@ body {
   font-size: 2rem;
 }
 
+.main__table {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  counter-reset: section;
+}
+
+.main__table-count:before {
+  counter-increment: section;
+  content: counter(section);
+  text-align: center;
+}
+
+.main__table th, .main__table td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 15px;
+}
+
 /* Footer */
 .footer {
   background-color: #003c82;
