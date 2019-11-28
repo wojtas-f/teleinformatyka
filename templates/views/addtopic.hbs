@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+</html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dodaj temat pracy dyplomowej</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <script src="/js/form_validation.js"></script>
+</head>
+
+<body>
+
+    {{>header}}
+    <div class="add-topic">
+        <h1>Dodawanie tematu pracy dyplomowej</h1>
+        <div id="errorDisplay" class="add-topic__errorDisplay">{{error_msg}}</div>
+
+        <form class="add-topic__form" name="add_topic_form" method="POST" action="/topic" onsubmit="return validateRegisterForm()">
+            <p>Temat pracy:</p>
+            <input type="text" name="title" placeholder="Tytuł pracy dyplomowej 10-100 słów" required>
+
+            <p>Opis pracy:</p>
+            <textarea name="description" placeholder="Opis pracy dyplomowej 20-1000 znaków" rows="4" required></textarea>
+
+            <div class="add-topic__form-radiobox">
+                <input type="radio" name="level" value="engineer" checked="checked" class="add-topic__form-radiobox-dot" required>
+                <label for="engineer">Inżynier</label>
+            </div>
+            <div class="add-topic__form-radiobox">
+                <input type="radio" name="level" value="master" class="add-topic__form-radiobox-dot" required>
+                <label for="master">Magister</label>
+            </div>
+
+
+            <input type="submit" name="" value="Dodaj temat pracy">
+        </form>
+    </div>
+
+    {{>footer}}
+</body>
+
+</html>

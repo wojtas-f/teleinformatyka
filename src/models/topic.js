@@ -27,7 +27,7 @@ const topicSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 20,
-        maxlength: 400
+        maxlength: 1000
     },
     level: {
         type: String,

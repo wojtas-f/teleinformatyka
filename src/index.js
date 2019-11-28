@@ -26,8 +26,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(userRouter)
-app.use(pagesRouter)
+
 app.use(topicRouter)
+app.use(pagesRouter) // To cholerstwo ma być na końcu !!!
 
 app.listen(port, () =>
     console.log(chalk.green(`Server started on port ${port}`))

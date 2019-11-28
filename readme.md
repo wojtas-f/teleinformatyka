@@ -34,8 +34,10 @@ Moduły i paczki wykorzystane przy tworzeniu projektu
 * hbs 4.0.6
 * jsdoc 3.6.3
 * better-docs 1.4.7
+* chalk 3.0.0
 
 _Aktualizacja handlebars do wersi 4.5.3_
+
 ---
 
 ## Dokumentacja 

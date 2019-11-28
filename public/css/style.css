@@ -26,7 +26,7 @@ body {
           align-items: center;
 }
 
-.header__logo-img {
+.header__form-logo-img {
   height: 80px;
   padding: 5px;
 }
@@ -90,6 +90,23 @@ body {
   text-align: justify;
 }
 
+.main__overview {
+  padding: 20px 5px;
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  background: #3c4245;
+  color: white;
+  border-radius: 15px;
+  padding: 10px 20px;
+}
+
+.main__overview h2 {
+  margin: 0;
+  padding: 0 0 20px;
+  font-size: 2rem;
+}
+
 /* Footer */
 .footer {
   background-color: #003c82;
@@ -142,7 +159,8 @@ body {
 }
 
 .loginbox input[type='text'],
-.loginbox input[type='password'] {
+.loginbox input[type='password'],
+.loginbox input[type='textarea'] {
   border: none;
   border-bottom: 1px solid #fff;
   background: transparent;
@@ -178,18 +196,59 @@ body {
   color: #ffc107;
 }
 
+.add-topic {
+  padding: 20px 0;
+  margin-top: 200px;
+  border-radius: 15px;
+  background: #3c4245;
+  color: #fff;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.add-topic__form {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.add-topic__form input {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 5px;
+}
+
+.add-topic__form textarea {
+  margin-bottom: 20px;
+  padding: 10px 5px;
+  width: 100%;
+}
+
+.add-topic__form-radiobox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.add-topic__form-radiobox-dot {
+  width: 20px !important;
+}
+
 h1 {
   margin: 0;
   padding: 0 0 20px;
   text-align: center;
   font-size: 22px;
-}
-
-h2 {
-  margin: 0;
-  padding: 0 0 20px;
-  text-align: center;
-  font-size: 16px;
 }
 
 .loginbox {
@@ -237,8 +296,8 @@ h2 {
   margin-bottom: 20px;
 }
 
-.loginbox input[type="text"],
-.loginbox input[type="password"] {
+.loginbox input[type='text'],
+.loginbox input[type='password'] {
   border: none;
   border-bottom: 1px solid #fff;
   background: transparent;
@@ -248,7 +307,7 @@ h2 {
   font-size: 16px;
 }
 
-.loginbox input[type="submit"] {
+.loginbox input[type='submit'] {
   border: none;
   outline: none;
   height: 40px;
@@ -258,7 +317,7 @@ h2 {
   border-radius: 10px;
 }
 
-.loginbox input[type="submit"]:hover {
+.loginbox input[type='submit']:hover {
   cursor: pointer;
   background-color: #003c82;
 }
