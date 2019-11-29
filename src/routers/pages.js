@@ -6,11 +6,10 @@
 const express = require('express')
 const router = new express.Router()
 
-
 /**
  * Funkcja renderująca stronę startową
  * @module PagesRouter
- * @function get
+ * @function get_/
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
@@ -21,7 +20,7 @@ router.get('', (req, res) => {
 /**
  * Funkcja renderująca stronę logowania
  * @module PagesRouter
- * @function get/login
+ * @function get_/login
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
@@ -32,7 +31,7 @@ router.get('/login', (req, res) => {
 /**
  * Funkcja renderująca stronę rejestracja
  * @module PagesRouter
- * @function get/register
+ * @function get_/register
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
@@ -43,18 +42,18 @@ router.get('/register', (req, res) => {
 /**
  * Funkcja renderująca stronę do wprowadzania tematów pracy dyplomowej. Strona dostępna tylko dla zalogowanego użytkownika ze statusem promotora
  * @module PagesRouter
- * @function topic/add
+ * @function get_/topic/add
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/topic',  (req, res) => {
+router.get('/topic', (req, res) => {
     res.render('addtopic')
 })
 
 /**
  * Do usunięcia
  */
-router.get('/promotorpanel',  (req, res) => {
+router.get('/promotorpanel', (req, res) => {
     res.render('promotor_panel')
 })
 
@@ -65,9 +64,8 @@ router.get('/promotorpanel',  (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('*',  (req, res) => {
+router.get('*', (req, res) => {
     res.render('404', { error: 'Page not found', title: '404' })
 })
-
 
 module.exports = router

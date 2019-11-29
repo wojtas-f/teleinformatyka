@@ -25,7 +25,10 @@
                     <th>Tytuł</th>
                     <th>Opis</th>
                     <th>Poziom</th>
-                    <th>Status</th>
+                    <th>Wolny</th>
+                    <th>Promotor</th>
+                    <th>Data</th>
+
                 </tr>
             {{#each topic}}
                 <tr>
@@ -34,6 +37,8 @@
                     <td>{{this.description}}</td>
                     <td>{{this.level}}</td>
                     <td>{{this.reservationStatus}}</td>
+                    <td>{{this.author}}</td>
+                    <td>{{this.date}}</td>
                 </tr>
             {{/each}}
         </table>

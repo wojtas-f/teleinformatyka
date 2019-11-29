@@ -16,9 +16,24 @@
     {{>header}}
     <div class="main">
         <form action="/topic" class="elo">
-        <label for="">Dodaj temat</label>
+            <label for="">Dodaj temat</label>
                 <input type="submit" value="Dodaj temat">
-            </form>
+        </form>
+        <br>
+        <hr>
+        <form action="/list_params" class="elo">
+            <label for="">Wyszukaj temat</label>
+            <input type="text" name="author" placeholder="Wpisz imie i nazwisko promotora" col="10">
+                <input type="submit" value="Wyszukaj">
+        </form>
+        <br>
+        <hr>
+        <form action="/list" class="elo">
+            <label for="">Wyszukaj temat</label>
+                <input type="submit" value="Wyszukaj">
+        </form>
+        <br>
+        <hr>
     </div>
     
     {{>footer}}

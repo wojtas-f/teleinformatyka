@@ -7,14 +7,16 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 /**
- * Schemat opisujacy użytkownika
+ * Schemat mongoose opisujacy użytkownika odwzorowany na kolekcję MongoDB
+ * Więcej o schematach w mongoose {@link https://mongoosejs.com/docs/guide.html}
  * @constructor userSchema
- * @property {string} name - Imie użytkownika (required,trim)
- * @property {string} album - Numer albumu użytkownika (required,trim,6-znaków,unique)
- * @property {string} email - Adres email użytkownika (required,unique,trim,lowercase) Musi zawierać stud.prz.edu.pl. Poprawnosć adresu sprawdzana z apomocą valdiatora
- * @property {string} password - Hasło (required,minimum 11 znaków, nie mozę zawierać słów: admin, password lub 12345)
- * @property {number} age - Wiek użytkownika (default: 0, unrequired,positive number)
- * @property {string} status - Status użytkownika na uczelni
+ * @property {String} name - Imie użytkownika (required,trim)
+ * @property {String} album - Numer albumu użytkownika (required,trim,6-znaków,unique)
+ * @property {String} email - Adres email użytkownika (required,unique,trim,lowercase) Musi zawierać stud.prz.edu.pl. Poprawnosć adresu sprawdzana z apomocą valdiatora
+ * @property {String} password - Hasło (required,minimum 11 znaków, nie mozę zawierać słów: admin, password lub 12345)
+ * @property {Number} age - Wiek użytkownika (default: 0, unrequired,positive number)
+ * @property {String} status - Status użytkownika na uczelni
+ * @property {Date} date - Data rejestracji użytkownika
  */
 
 const userSchema = new mongoose.Schema({
@@ -76,6 +78,10 @@ const userSchema = new mongoose.Schema({
     status: {
         type: String,
         default: 'student'
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 

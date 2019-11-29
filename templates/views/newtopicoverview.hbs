@@ -19,13 +19,15 @@
     {{>header}}
         <div class="main">
         <div class="main__overview">
-            <h2>Tytuł pracy dyplomowej: {{title}} </h2>
+            <h2>Tytuł pracy dyplomowej: {{topic.title}} </h2>
             <h3>Opis pracy dyplomowej:</h3>
-            <p>{{description}}</p>
+            <p>{{topic.description}}</p>
             <p>Poziom pracy dyplomowej:</p>
             {{level}}
             <p>Status:</p>
-            <p>Temat wolny: {{status}}</p>
+            <p>Temat wolny: {{topic.reservationStatus}}</p>
+            <p>Poziom:</p>
+            <p>{{topic.level}}</p>
         </div>
     </div>
     {{>footer}}
