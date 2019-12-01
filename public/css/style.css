@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-image: url(./img/home-bg.jpg);
+  background-image: url("../img/home-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left bottom;
@@ -127,6 +127,35 @@ body {
   padding: 15px;
 }
 
+.main__search-by-promotor {
+  text-align: center;
+}
+
+.main__search-by-promotor input[type='submit'] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #979797;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.main__search-by-promotor input[type='submit']:hover {
+  cursor: pointer;
+  background-color: #003c82;
+}
+
+.main__search-by-promotor input[type='text'] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
 /* Footer */
 .footer {
   background-color: #003c82;
@@ -144,25 +173,24 @@ body {
 
 .loginbox {
   width: 320px;
-  height: 420px;
-  border-radius: 5%;
+  margin-top: 20vh;
+  margin-right: auto;
+  margin-left: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 20px;
   background: #3c4245;
   color: #fff;
-  top: 50%;
-  left: 50%;
-  position: fixed;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   padding: 70px 30px;
+  position: relative;
 }
 
 .loginbox__avatar-img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  position: fixed;
+  position: absolute;
   top: -50px;
   left: calc(50% - 50px);
 }
@@ -269,87 +297,5 @@ h1 {
   padding: 0 0 20px;
   text-align: center;
   font-size: 22px;
-}
-
-.loginbox {
-  width: 400px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border-radius: 2%;
-  background: #3c4245;
-  color: #fff;
-  top: 50%;
-  left: 50%;
-  position: fixed;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 70px 30px;
-}
-
-.loginbox__avatar-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: fixed;
-  top: -50px;
-  left: calc(50% - 50px);
-}
-
-.loginbox__errorDisplay {
-  color: #b83131;
-  font-size: 1rem;
-  text-align: center;
-  padding: 15px 0;
-}
-
-.loginbox p {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-}
-
-.loginbox input {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.loginbox input[type='text'],
-.loginbox input[type='password'] {
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
-  height: 40px;
-  color: #fff;
-  font-size: 16px;
-}
-
-.loginbox input[type='submit'] {
-  border: none;
-  outline: none;
-  height: 40px;
-  background: #979797;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 10px;
-}
-
-.loginbox input[type='submit']:hover {
-  cursor: pointer;
-  background-color: #003c82;
-}
-
-.loginbox a {
-  text-decoration: none;
-  font-size: 12px;
-  line-height: 20px;
-  color: #fff;
-}
-
-.loginbox a:hover {
-  color: #ffc107;
 }
 /*# sourceMappingURL=style.css.map */
