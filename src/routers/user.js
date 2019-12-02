@@ -58,4 +58,20 @@ router.get('/users/all', async (req, res) => {
     }
 })
 
+/**
+ * Funkcja zwraca stronę z formularzem do zmiany danych urzytkownika
+ * @module UserRouter
+ * @function get_/users/update_profile
+ * @async
+ * @param {Object} req - Obiekt request (Express)
+ * @param {Object} res - Obiekt response (Express)
+ */
+router.get('/users/update_profile', async (req, res) => {
+    try {
+        res.render('update_user')
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 module.exports = router

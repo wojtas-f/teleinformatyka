@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,37 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        .elo{
-            margin-left: 200px;
-        }
+
     </style>
 </head>
+
 <body>
     {{>header}}
     <div class="main">
-        <form action="/topic" class="elo">
-            <label for="">Dodaj temat</label>
-                <input type="submit" value="Dodaj temat">
-        </form>
-        
-        <form action="/list" class="elo">
-            <label for="">Wyszukaj temat</label>
-                <input type="submit" value="Wyszukaj">
-        </form>
-        
+        <div class="main__promotor-panel">
+            <div class="main__promotor-panel-btnbox">
+                <form action="/topic">
+                    <input type="submit" value="Dodaj nowy temat">
+                </form>
+
+                <form action="/list">
+                    <input type="submit" value="Lista tematów">
+                </form>
+
+                <form action="/users/update_profile" method='get'>
+                    <input type="submit" value="Aktualizuj profil">
+                </form>
+            </div>
+            <div class="main__promotor-panel-user-data">
+
+            </div>
+        </div>
+
+
+
     </div>
-    
+
     {{>footer}}
 </body>
+
 </html>

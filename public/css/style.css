@@ -18,6 +18,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  z-index: 10;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -121,7 +122,8 @@ body {
   text-align: center;
 }
 
-.main__table th, .main__table td {
+.main__table th,
+.main__table td {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 15px;
@@ -156,6 +158,35 @@ body {
   font-size: 16px;
 }
 
+.main__promotor-panel {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.main__promotor-panel-btnbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main__promotor-panel-btnbox input[type='submit'] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #979797;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  margin: 0 10px;
+  border: 1px black solid;
+}
+
+.main__promotor-panel-btnbox input[type='submit']:hover {
+  cursor: pointer;
+  background-color: #003c82;
+}
+
 /* Footer */
 .footer {
   background-color: #003c82;
@@ -172,7 +203,8 @@ body {
 }
 
 .loginbox {
-  width: 320px;
+  min-width: 320px;
+  max-width: 400px;
   margin-top: 20vh;
   margin-right: auto;
   margin-left: auto;
@@ -182,8 +214,13 @@ body {
   border-radius: 20px;
   background: #3c4245;
   color: #fff;
-  padding: 70px 30px;
+  padding: 50px 40px;
   position: relative;
+  text-align: center;
+}
+
+.loginbox h1 {
+  font-size: 2rem;
 }
 
 .loginbox__avatar-img {
@@ -209,13 +246,14 @@ body {
 .loginbox input[type='text'],
 .loginbox input[type='password'],
 .loginbox input[type='textarea'] {
+  margin-top: 10px;
   border: none;
   border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
   height: 40px;
-  color: #fff;
   font-size: 16px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  padding-left: 10px;
 }
 
 .loginbox input[type='submit'] {
@@ -226,6 +264,7 @@ body {
   color: #fff;
   font-size: 18px;
   border-radius: 10px;
+  width: 200px;
 }
 
 .loginbox input[type='submit']:hover {
@@ -251,6 +290,7 @@ body {
   background: #3c4245;
   color: #fff;
   width: 50%;
+  min-width: 400px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -266,18 +306,21 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  text-align: center;
 }
 
 .add-topic__form input {
   width: 100%;
   margin-bottom: 20px;
   padding: 10px 5px;
+  border-radius: 10px;
 }
 
 .add-topic__form textarea {
   margin-bottom: 20px;
   padding: 10px 5px;
   width: 100%;
+  border-radius: 10px;
 }
 
 .add-topic__form-radiobox {
@@ -290,6 +333,24 @@ body {
 
 .add-topic__form-radiobox-dot {
   width: 20px !important;
+}
+
+.add-topic__form input[type='submit'] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #979797;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.add-topic__form input[type='submit']:hover {
+  cursor: pointer;
+  background-color: #003c82;
 }
 
 h1 {

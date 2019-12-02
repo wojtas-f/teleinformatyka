@@ -17,19 +17,19 @@
     {{>header}}
     <div class="loginbox">
         <img src="/img/avatar.png" class="loginbox__avatar-img">
-        <h1>Rejestracja</h1>
+        <h1>Register Here</h1>
         <div id="errorDisplay" class="loginbox__errorDisplay">{{error_msg}}</div>
         
-        <form name="register_form" method="POST" action="/users" onsubmit="return validateRegisterForm()">
+        <form name="register_form" method="PATCH" action="/users" onsubmit="return validateRegisterForm()">
             <p>Imie i nazwisko</p>
             <input type="text" name="name" placeholder="Imie i nazwisko" required>
             <p>Numer albumu</p>
-            <input type="text" name="album" placeholder="Numer albumu" required>
+            <input type="text" name="album" placeholder="Nie można zmienić" disabled>
             <p>E-mail</p>
             <input type="text" name="email" placeholder="E-mail" required>
-            <p>Hasło</p>
+            <p>Nowe hasło</p>
             <input type="password" name="password" placeholder="Hasło" required>
-            <p>Potwierdź hasło</p>
+            <p>Potwierdź nowe hasło</p>
             <input type="password" name="rep_password" placeholder="Hasło" required> 
             <input type="submit" name="" value="Zarejestruj">
         </form>
