@@ -3,10 +3,6 @@
 
 Projekt wykonany na zaliczenie przedmiotu Systemy teleinformatyczne - Politechnika Rzeszowska im. Ignacego Łukasiewicza
 
-### Wykonali:
-* Wojtaś Filip - <a href="https://github.com/Vulpie">Vulpie</a>
-* Trześniowski Dominik - <a href="https://github.com/piniok">piniok</a>
-
 ---
 
 ### Repozytorium projektu:
