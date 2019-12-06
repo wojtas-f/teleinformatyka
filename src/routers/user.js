@@ -5,6 +5,7 @@
 
 const express = require('express')
 const User = require('../models/user')
+const auth = require('../middleware/auth')
 const router = new express.Router()
 
 /**
@@ -38,40 +39,35 @@ router.post('/users', async (req, res) => {
     }
 })
 
-/**
- * Funkcja zwraca listę wszystkich użytkowników
- * @module UserRouter
- * @function get_/users/all
- * @async
- * @param {Object} req - Obiekt request (Express)
- * @param {Object} res - Obiekt response (Express)
- */
-router.get('/users/all', async (req, res) => {
+
+router.post('/users/login', async (req,res)=>{
     try {
-        const users = await User.find({})
-        if (!users) {
-            return res.status(400).send()
-        }
-        res.send(users)
-    } catch (e) {
-        res.status(500).send()
+        console.log('start')
+        console.log(req.body.email)
+        console.log(req.body.password)
+        const user = await User.findToLogIn(
+            req.body.email,
+            req.body.password
+        )
+        const token = await user.generateAuthToken()
+        res.send({user,token})
+
+    } catch (error) {
+        res.status(400).send()
     }
 })
 
 /**
- * Funkcja zwraca stronę z formularzem do zmiany danych urzytkownika
+ * Funkcja zwraca profil z danymi użytkownika
  * @module UserRouter
- * @function get_/users/update_profile
+ * @function get_/users/me
  * @async
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/users/update_profile', async (req, res) => {
-    try {
-        res.render('update_user')
-    } catch (e) {
-        res.status(500).send()
-    }
+router.get('/users/me',auth, async (req, res) => {
+    res.send(req.user)
+    
 })
 
 module.exports = router

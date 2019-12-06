@@ -14,12 +14,12 @@
         <div class="loginbox">
             <img src= "img/avatar.png" class= "loginbox__avatar-img">
             <h1>Login Here</h1>
-            <form>
+            <form method="POST" action="/users/login">
                 <p>E-mail</p>
-                <input type="text" name="" placeholder="Enter Username">
+                <input type="text" name="email" placeholder="Podaj email">
                 <p>Password</p>
-                <input type="password" name="" placeholder="Enter Password">
-                <input type="submit" name="" value="Login">
+                <input type="password" name="password" placeholder="Podaj hasło">
+                <input type="submit" name="" value="Zaloguj">
                 <a href="#">Lost your password? </a><br>
                 <a href="">Don't have an account? </a>
             </form>

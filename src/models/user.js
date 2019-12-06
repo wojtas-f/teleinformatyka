@@ -5,7 +5,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
-
+const jwt = require('jsonwebtoken')
 /**
  * Schemat mongoose opisujacy użytkownika odwzorowany na kolekcję MongoDB
  * Więcej o schematach w mongoose {@link https://mongoosejs.com/docs/guide.html}
@@ -82,8 +82,49 @@ const userSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    tokens: [
+        {
+            token: {
+                type: String,
+                required: true
+            }
+        }
+    ]
 })
+
+userSchema.methods.generateAuthToken = async function() {
+    console.log('Auth start')
+    const user = this
+    console.log('Auth start',user)
+
+    const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse')
+    console.log('auth token:',token)
+    user.tokens = user.tokens.concat({ token })
+
+    await user.save()
+    console.log('Auth end')
+
+    return token
+}
+
+userSchema.statics.findToLogIn = async (email, password) => {
+    console.log('Find start')
+
+    const user = await User.findOne({ email })
+    console.log('Find', user)
+    if (!user) {
+        throw new Error('Unable to login')
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
+        throw new Error('Unable to login')
+    }
+    console.log('Find end')
+
+    return user
+}
 
 /**
  * Middleware do szyfrowania hasła przed zapisaniem
@@ -107,6 +148,8 @@ userSchema.pre('save', async function(req, res, next) {
     }
     next()
 })
+
+// pre or post to set if the action will be taken before or after specified event (save, validate, ... see mongoose doc)
 
 const User = mongoose.model('User', userSchema)
 module.exports = User
