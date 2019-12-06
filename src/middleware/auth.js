@@ -1,12 +1,17 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
+
 const auth = async (req,res,next)=>{
     try {
+        // console.log(req.header['Authorization'])
+        // const token = req.header('Authorization').replace('Bearer ', '')
+        const token = req.session.token
+
+        //const token = req.header["x-auth-token"] || req.header["authorization"];
+
         
-        const token = req.header('Authorization').replace('Bearer ', '')
-        console.log('elo',token)
-        const decoded = jwt.verify(token,'thisismynewcourse')
+        const decoded = jwt.verify(req.session.token,'thisismynewcourse')
         const user = await User.findOne({
             _id: decoded._id,
             'tokens.token': token
@@ -15,7 +20,7 @@ const auth = async (req,res,next)=>{
         if(!user){
             throw new Error({err: 'Error'})
         }
-
+        
         req.token = token
         req.user = user
         next()

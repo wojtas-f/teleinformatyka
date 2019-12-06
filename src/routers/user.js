@@ -26,6 +26,8 @@ router.post('/users', async (req, res) => {
         } else {
             msg = 'Witam Pana Promotora xD'
         }
+        const token = await user.generateAuthToken()
+        req.session.token = token
         res.render('welcome', {
             title: 'Witamy na naszej platformie',
             msg: msg,
@@ -42,15 +44,16 @@ router.post('/users', async (req, res) => {
 
 router.post('/users/login', async (req,res)=>{
     try {
-        console.log('start')
-        console.log(req.body.email)
-        console.log(req.body.password)
+        
         const user = await User.findToLogIn(
             req.body.email,
             req.body.password
         )
+        
         const token = await user.generateAuthToken()
-        res.send({user,token})
+        req.session.token = token
+        
+        res.redirect('/promotorpanel')
 
     } catch (error) {
         res.status(400).send()
@@ -68,6 +71,10 @@ router.post('/users/login', async (req,res)=>{
 router.get('/users/me',auth, async (req, res) => {
     res.send(req.user)
     
+})
+router.get('/meme',(req,res)=>{
+    console.log(req.session)
+    res.send('Ok,boomer')
 })
 
 module.exports = router

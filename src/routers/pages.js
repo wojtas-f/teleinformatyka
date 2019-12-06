@@ -4,6 +4,8 @@
  */
 
 const express = require('express')
+const auth = require('../middleware/auth')
+const logged = require('../middleware/logged')
 const router = new express.Router()
 
 /**
@@ -24,7 +26,7 @@ router.get('', (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/login', (req, res) => {
+router.get('/login',logged, (req, res) => {
     res.render('login')
 })
 
@@ -35,7 +37,7 @@ router.get('/login', (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/register', (req, res) => {
+router.get('/register',logged, (req, res) => {
     res.render('register')
 })
 
@@ -46,14 +48,14 @@ router.get('/register', (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/topic', (req, res) => {
+router.get('/topic',auth, (req, res) => {
     res.render('addtopic')
 })
 
 /**
  * Do usunięcia
  */
-router.get('/promotorpanel', (req, res) => {
+router.get('/promotorpanel',auth, (req, res) => {
     res.render('promotor_panel')
 })
 

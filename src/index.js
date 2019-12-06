@@ -1,16 +1,22 @@
 const path = require('path')
 
-const express = require('express')
+
+var express = require('express')
+const session = require('express-session')
 const chalk = require('chalk')
 const userRouter = require('./routers/user')
 const pagesRouter = require('./routers/pages')
 const topicRouter = require('./routers/topic')
 const hbs = require('hbs')
+const sesionParams = require('./session/session')
 
 require('./db/mongoose')
 
 const app = express()
 const port = process.env.PORT || 3000
+
+app.use(session(sesionParams))
+
 
 /**
  * @property {String} publicDirectoryPath - Ścieżka do folderu publicznego. Służy do ustawienia ścieżki do plików statycznych
@@ -36,6 +42,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(userRouter)
 app.use(topicRouter)
+
 
 app.use(pagesRouter) // Contains wildcard. Must be used as the last one
 
