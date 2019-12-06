@@ -17,7 +17,9 @@ const port = process.env.PORT || 3000
 
 app.use(session(sesionParams))
 
-
+app.get('/dev',(req,res)=>{
+    res.render('panel')
+})
 /**
  * @property {String} publicDirectoryPath - Ścieżka do folderu publicznego. Służy do ustawienia ścieżki do plików statycznych
  */

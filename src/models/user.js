@@ -63,7 +63,22 @@ const userSchema = new mongoose.Schema({
                 pswd.toLowerCase().includes('admin') ||
                 pswd.toLowerCase().includes('12345')
             ) {
-                throw new Error('WTF!!!')
+                throw new Error('Hasło nie może zawierać słowa admin ani ciągu znaków 12345')
+            }
+        }
+    },
+    phone: {
+        type: String,
+        trim: true,
+        validate(number){
+            // if(!number.isNumeric()){
+            //     throw new Error('Numer telefonu moze zawierac tylko liczby')
+            // }
+            // if (!validator.isEmail(email_string)) {
+            //     throw new Error('Invalid email')
+            // }
+            if(!validator.isMobilePhone(number,'pl-PL')){
+                throw new Error('Nieprawidłowy format lub numer telefonu')
             }
         }
     },

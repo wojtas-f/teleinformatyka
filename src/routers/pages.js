@@ -56,7 +56,8 @@ router.get('/topic',auth, (req, res) => {
  * Do usunięcia
  */
 router.get('/panel',auth, (req, res) => {
-    res.render('panel')
+    const user = req.user
+    res.render('panel',{user})
 })
 
 /**

@@ -8,37 +8,26 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        
+
     </style>
 </head>
 
 <body>
-    {{>header}}
+    {{>header_logged}}
     <div class="main">
         <div class="main__promotor-panel">
-            <div class="main__promotor-panel-btnbox">
-                <form action="/topic">
-                    <input type="submit" value="Dodaj nowy temat">
-                </form>
 
-                <form action="/list">
-                    <input type="submit" value="Lista tematów">
-                </form>
-
-                <form action="/users/update_profile" method='get'>
-                    <input type="submit" value="Aktualizuj profil">
-                </form>
-
-                <form action="/users/logout" method='post'>
-                    <input type="submit" value="Wyloguj">
-                </form>
-
-                <form action="/users/remove" method='post'>
-                    <input type="submit" value="Usuń konto">
-                </form>
-            </div>
             <div class="main__promotor-panel-user-data">
-
+                <h3>Profil</h3>
+                <ul>
+                    <li>Imie i nazwisko: {{user.name}}</li>
+                    <li>Numer albumu: {{user.album}}</li>
+                    <li>Email: {{user.email}}</li>
+                    <li>Wiek: {{user.age}}</li>
+                    <li>Numer telefonu: {{user.phone}}</li>
+                    <li>Status: {{user.status}}</li>
+                    <li>Data rejestracji: {{user.createdAt}}</li>
+                </ul>
             </div>
         </div>
 

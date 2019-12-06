@@ -7,7 +7,25 @@
         </div>
         <div class="header__btn-box">
             
-            <h3>{{title}}</h3>
+            <form action="/topic" class="header__btn-box-btn">
+                    <input type="submit" value="Dodaj nowy temat">
+                </form>
+
+                <form action="/list" class="header__btn-box-btn">
+                    <input type="submit" value="Lista tematów">
+                </form>
+
+                <form action="/users/update_profile" method='get' class="header__btn-box-btn">
+                    <input type="submit" value="Aktualizuj profil">
+                </form>
+
+                <form action="/users/logout" method='post' class="header__btn-box-btn">
+                    <input type="submit" value="Wyloguj">
+                </form>
+
+                <form action="/users/remove" method='post' class="header__btn-box-btn">
+                    <input type="submit" value="Usuń konto">
+                </form>
 
         </div>
     </div>

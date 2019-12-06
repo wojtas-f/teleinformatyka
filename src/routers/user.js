@@ -49,7 +49,7 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken()
         req.session.token = token
 
-        res.redirect('/panel')
+        res.render('panel',{user})
     } catch (error) {
         res.status(400).send()
     }
@@ -68,36 +68,39 @@ router.get('/users/me', auth, async (req, res) => {
 })
 
 router.post('/users/remove', auth, async (req, res) => {
+    let msg = 'Ups. Coś poszło nie tak'
     try {
         await req.user.remove()
         req.session.destroy(err => {
             if (err) {
-                return res.redirect('/panel')
+                return res.render('panel',{user,msg})
             }
         })
         res.clearCookie(session_name)
         res.redirect('/login')
-    } catch (error) {
-        res.redirect('/panel')
+    } catch (error) { 
+        res.render('panel',{user, msg})
     }
 })
 
 router.post('/users/logout', auth, async (req, res) => {
+    let msg = 'Ups. Coś poszło nie tak'
+    const user = req.user
     try {
         req.user.tokens = req.user.tokens.filter(token => {
             return token.token !== req.token
         })
         await req.user.save()
-
+        
         req.session.destroy(err => {
             if (err) {
-                return res.redirect('/panel')
+                return res.render('panel',{user,msg})
             }
         })
         res.clearCookie(session_name)
         res.redirect('/login')
     } catch (error) {
-        res.redirect('/panel')
+        res.render('panel',{user,msg})
     }
 })
 
