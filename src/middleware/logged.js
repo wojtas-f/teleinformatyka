@@ -1,14 +1,12 @@
 const User = require('../models/user')
 
-const logged = async (req,res,next)=>{
+const logged = async (req, res, next) => {
     try {
-        if(req.session.token){
-             return res.redirect('/promotorpanel')
+        if (req.session.token) {
+            return res.redirect('/panel')
         }
         next()
-    } catch (error) {
-        
-    }
+    } catch (error) {}
 }
 
 module.exports = logged

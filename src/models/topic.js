@@ -18,37 +18,41 @@ const mongoose = require('mongoose')
  *
  */
 
-const topicSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 10,
-        maxlength: 100
+const topicSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: 10,
+            maxlength: 200
+        },
+        description: {
+            type: String,
+            required: true,
+            minlength: 20,
+            maxlength: 1500
+        },
+        level: {
+            type: String,
+            default: 'inżynier'
+        },
+        reservationStatus: {
+            type: Boolean,
+            default: true
+        },
+        author: {
+            type: String,
+            default: 'Filip Wojtaś'
+        },
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
+        }
     },
-    description: {
-        type: String,
-        required: true,
-        minlength: 20,
-        maxlength: 1000
-    },
-    level: {
-        type: String,
-        default: 'inżynier'
-    },
-    reservationStatus: {
-        type: Boolean,
-        default: true
-    },
-    author: {
-        type: String,
-        default: 'Filip Wojtaś'
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
-})
+    { timestamps: true }
+)
 
 const Topic = mongoose.model('Topic', topicSchema)
 module.exports = Topic

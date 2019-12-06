@@ -55,8 +55,8 @@ router.get('/topic',auth, (req, res) => {
 /**
  * Do usunięcia
  */
-router.get('/promotorpanel',auth, (req, res) => {
-    res.render('promotor_panel')
+router.get('/panel',auth, (req, res) => {
+    res.render('panel')
 })
 
 /**

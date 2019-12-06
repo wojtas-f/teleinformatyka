@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const session = require('express-session')
+const Task = require('./topic')
 /**
  * Schemat mongoose opisujacy użytkownika odwzorowany na kolekcję MongoDB
  * Więcej o schematach w mongoose {@link https://mongoosejs.com/docs/guide.html}
@@ -80,10 +80,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'student'
     },
-    date: {
-        type: Date,
-        default: Date.now
-    },
     tokens: [
         {
             token: {
@@ -92,6 +88,14 @@ const userSchema = new mongoose.Schema({
             }
         }
     ]
+},{
+    timestamps: true
+})
+
+userSchema.virtual('topic',{
+    ref: 'Topic',
+    localField: '_id',
+    foreignField: 'owner'
 })
 
 userSchema.methods.generateAuthToken = async function() {
