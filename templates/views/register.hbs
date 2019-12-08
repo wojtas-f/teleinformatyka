@@ -18,7 +18,11 @@
     <div class="loginbox">
         <img src="/img/avatar.png" class="loginbox__avatar-img">
         <h1>Rejestracja</h1>
-        <div id="errorDisplay" class="loginbox__errorDisplay">{{error_msg}}</div>
+        
+        <div class="main__msg-box" id="errorDisplay">
+            <p class="main__msg-box-msg">{{msg}}</p>
+            <p class="main__msg-box-err">{{err_msg}}</p>
+        </div>
         
         <form name="register_form" method="POST" action="/users" onsubmit="return validateRegisterForm()">
             <p>Imie i nazwisko</p>

@@ -19,37 +19,31 @@ const router = new express.Router()
  */
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
-    let msg
     try {
         await user.save()
-        if (user.status === 'student') {
-            msg = 'Witam szanownego studenta'
-        } else {
-            msg = 'Witam Pana Promotora xD'
-        }
         const token = await user.generateAuthToken()
         req.session.token = token
-        res.render('welcome', {
-            title: 'Witamy na naszej platformie',
-            msg: msg,
-            name: user.name
+        res.render('panel', {
+            name: user.name,
+            msg: 'Witam na naszej platformie :)'
         })
     } catch (e) {
         // res.status(400).send(e.errors.email.message)
         res.render('register', {
-            error_msg: e.errors.email.message
+            err_msg: e.errors.email.message
         })
     }
 })
 
 router.post('/users/login', async (req, res) => {
+    let msg = 'Zalogowano poprawnie. Witamy ponownie'
     try {
         const user = await User.findToLogIn(req.body.email, req.body.password)
 
         const token = await user.generateAuthToken()
         req.session.token = token
 
-        res.render('panel',{user})
+        res.render('panel',{user, msg})
     } catch (error) {
         res.status(400).send()
     }
@@ -73,18 +67,18 @@ router.post('/users/remove', auth, async (req, res) => {
         await req.user.remove()
         req.session.destroy(err => {
             if (err) {
-                return res.render('panel',{user,msg})
+                return res.render('panel',{user,err_msg})
             }
         })
         res.clearCookie(session_name)
         res.redirect('/login')
     } catch (error) { 
-        res.render('panel',{user, msg})
+        res.render('panel',{user, err_msg})
     }
 })
 
 router.post('/users/logout', auth, async (req, res) => {
-    let msg = 'Ups. Coś poszło nie tak'
+    let err_msg = 'Ups. Coś poszło nie tak'
     const user = req.user
     try {
         req.user.tokens = req.user.tokens.filter(token => {
@@ -94,13 +88,13 @@ router.post('/users/logout', auth, async (req, res) => {
         
         req.session.destroy(err => {
             if (err) {
-                return res.render('panel',{user,msg})
+                return res.render('panel',{user,err_msg})
             }
         })
         res.clearCookie(session_name)
         res.redirect('/login')
     } catch (error) {
-        res.render('panel',{user,msg})
+        res.render('panel',{user,err_msg})
     }
 })
 
