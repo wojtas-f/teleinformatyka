@@ -19,11 +19,11 @@
             <p class="main__msg-box-msg">{{msg}}</p>
             <p class="main__msg-box-err">{{err_msg}}</p>
         </div>
-        
-        <div class="main__promotor-panel">
 
-            <div class="main__promotor-panel-user-data">
-                <h3>Profil</h3>
+        <div class="main__user-panel">
+
+            <div class="main__user-panel-data">
+                <h3 class="main__user-panel-data-title">Profil:</h3>
                 <ul>
                     <li>Imie i nazwisko: {{user.name}}</li>
                     <li>Numer albumu: {{user.album}}</li>
@@ -34,22 +34,27 @@
                     <li>Data rejestracji: {{user.createdAt}}</li>
                 </ul>
             </div>
+            <div class="main__user-panel-profile">
+                <img src="/img/user_placeholder.png" alt="User Profile Picture Placeholder"
+                    class="main__user-panel-profile-pfp">
+            </div>
         </div>
         <div class="main__panel-btnbox">
-            <form action="/users/logoutall" method='post' class="main__panel-btnbox-btn">
-                    <input type="submit" value="Wyloguj ze wszystkich urządzeń">
-        </form>
-        <form action="/users/remove" method='post' class="header__panel-btnbox-btn">
-                    <input type="submit" value="Usuń konto">
-        </form>
+            <form action="/users/logoutall" method='post' class="main__panel-btnbox-btn" onsubmit="return confirmLogoutAll()">
+                <input type="submit" value="Wyloguj ze wszystkich urządzeń" class="main__panel-btnbox-btn-submit">
+            </form>
+            <form action="/users/remove" method='post' class="header__panel-btnbox-btn" onsubmit="return confirmRemove()">
+                <input type="submit" value="Usuń konto" class="main__panel-btnbox-btn-submit">
+            </form>
         </div>
-        
+
 
 
 
     </div>
 
     {{>footer}}
+    <script src="/js/confirm.js"></script>
 </body>
 
 </html>

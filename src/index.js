@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const userRouter = require('./routers/user')
 const pagesRouter = require('./routers/pages')
 const topicRouter = require('./routers/topic')
+const devRouter = require('./routers/dev')
 const hbs = require('hbs')
 const sesionParams = require('./session/session')
 
@@ -17,9 +18,7 @@ const port = process.env.PORT || 3000
 
 app.use(session(sesionParams))
 
-app.get('/dev',(req,res)=>{
-    res.render('panel')
-})
+
 /**
  * @property {String} publicDirectoryPath - Ścieżka do folderu publicznego. Służy do ustawienia ścieżki do plików statycznych
  */
@@ -42,6 +41,7 @@ app.use(express.static(publicDirectoryPath))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.use(devRouter)
 app.use(userRouter)
 app.use(topicRouter)
 

@@ -60,9 +60,6 @@ router.get('/panel',auth, (req, res) => {
     res.render('panel',{user})
 })
 
-router.get('/dev',(req,res)=>{
-    res.render('dev')
-})
 /**
  * Funkcja renderująca stronę 404
  * @module PagesRouter
