@@ -98,5 +98,24 @@ router.post('/users/logout', auth, async (req, res) => {
     }
 })
 
+router.post('/users/logoutall', auth, async (req, res) => {
+    let err_msg = 'Ups. Coś poszło nie tak'
+    const user = req.user
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        
+        req.session.destroy(err => {
+            if (err) {
+                return res.render('panel',{user,err_msg})
+            }
+        })
+        res.clearCookie(session_name)
+        res.render('login', {msg: 'Zostałeś wylogowany ze wszystkich urządzeń'})
+    } catch (error) {
+        res.render('panel',{user,err_msg})
+    }
+})
+
 
 module.exports = router
