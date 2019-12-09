@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl"></html>
+<html lang="pl">
+
+</html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +12,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 </head>
+
 <body>
     {{>header}}
     <div class="main">
@@ -17,21 +21,24 @@
             <p class="main__msg-box-err">{{err_msg}}</p>
         </div>
         <div class="main__loginbox">
-            <img src= "img/avatar.png" class= "loginbox__avatar-img">
-            <h1>Login Here</h1>
+            <img src="img/avatar.png" class="loginbox__avatar-img">
+            <h2>Logowanie</h2>
             <form method="POST" action="/users/login">
-                <p>E-mail</p>
+                <p class="">E-mail</p>
                 <input type="text" name="email" placeholder="Podaj email">
-                <p>Password</p>
+                <p>Hasło</p>
                 <input type="password" name="password" placeholder="Podaj hasło">
                 <input type="submit" name="" value="Zaloguj">
-                <a href="#">Lost your password? </a><br>
-                <a href="">Don't have an account? </a>
+
             </form>
+            <a href="/">Zapomniałeś hasła? </a><br>
+            <a href="/register">Nie masz jeszcze konta? </a>
+
         </div>
     </div>
-        
+
     {{>footer}}
-    
+
 </body>
+
 </html>

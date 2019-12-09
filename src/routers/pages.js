@@ -60,6 +60,9 @@ router.get('/panel',auth, (req, res) => {
     res.render('panel',{user})
 })
 
+router.get('/dev',(req,res)=>{
+    res.render('dev')
+})
 /**
  * Funkcja renderująca stronę 404
  * @module PagesRouter
@@ -68,7 +71,7 @@ router.get('/panel',auth, (req, res) => {
  * @param {Object} res - Obiekt response (Express)
  */
 router.get('*', (req, res) => {
-    res.render('404', { error: 'Page not found', title: '404' })
+    res.render('404', { err_msg: '404 Page not found', title: '404' })
 })
 
 module.exports = router

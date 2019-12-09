@@ -5,23 +5,27 @@
             </form>
             
         </div>
-        <div class="header__btn-box">
+        <div class="header__btnbox">
             
-            <form action="/topic" class="header__btn-box-btn">
+            {{!-- <form action="/topic" class="header__btnbox-btn">
                     <input type="submit" value="Dodaj nowy temat">
-                </form>
+                </form> --}}
+                <div class="header__btnbox-btn">
+                    <a href="/topic" class="header__btnbox-btn-link">Dodaj nowy temat</a>
+                </div>
+                
 
-                <form action="/list" class="header__btn-box-btn">
+                {{!-- <form action="/list" class="header__btnbox-btn">
                     <input type="submit" value="Lista tematów">
-                </form>
+                </form> --}}
+                <div class="header__btnbox-btn">
+                    <a href="/list" class="header__btnbox-btn-link">Lista tematów</a>
+                </div>
+                
 
-                <form action="/users/logout" method='post' class="header__btn-box-btn">
-                    <input type="submit" value="Wyloguj">
+                <form action="/users/logout" method='post' class="header__btnbox-btn">
+                    <input type="submit" value="Wyloguj" class="header__btnbox-btn-submit">
                 </form>
-
-                <form action="/users/remove" method='post' class="header__btn-box-btn">
-                    <input type="submit" value="Usuń konto">
-                </form>
-
+                
         </div>
     </div>

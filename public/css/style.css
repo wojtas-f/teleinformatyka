@@ -1,7 +1,3 @@
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -36,7 +32,7 @@ body {
   padding: 5px;
 }
 
-.header__btn-box {
+.header__btnbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,6 +40,9 @@ body {
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -51,7 +50,7 @@ body {
           transform: translate(-20px);
 }
 
-.header__btn-box-btn {
+.header__btnbox-btn {
   margin: 0 5px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -59,17 +58,28 @@ body {
   text-align: center;
 }
 
-.header__btn-box-btn input[type='submit'] {
+.header__btnbox-btn-submit {
   border-radius: 10px;
   padding: 5px 10px;
+  background-color: white;
 }
 
-.header__btn-box-btn input[type="submit"]:hover {
+.header__btnbox-btn-submit:hover {
   cursor: pointer;
-  border: 2px solid blue;
+  background-color: #498fdf;
 }
 
-.header__btn-box-btn:hover {
+.header__btnbox-btn-link {
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.header__btnbox-btn-link:hover {
   background-color: #498fdf;
   cursor: pointer;
 }
@@ -122,7 +132,7 @@ body {
 }
 
 .main__msg-box-err {
-  color: green;
+  color: #a31010;
 }
 
 .main__post {
@@ -157,5 +167,73 @@ body {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 15px;
+}
+
+.main__panel-btnbox-btn {
+  margin: 0 5px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  text-align: center;
+}
+
+.main__panel-btnbox-btn-submit {
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: white;
+}
+
+.main__panel-btnbox-btn-submit:hover {
+  cursor: pointer;
+  background-color: #498fdf;
+}
+
+.main__panel-btnbox-btn-link {
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.main__panel-btnbox-btn-link:hover {
+  background-color: #498fdf;
+  cursor: pointer;
+}
+
+.main__loginbox {
+  width: 20%;
+  min-width: 320px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 20px;
+  background: #3c4245;
+  color: #fff;
+  padding: 50px 40px;
+  position: relative;
+  text-align: center;
+}
+
+.main__loginbox__avatar-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+}
+
+.main__loginbox p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+.main__loginbox input {
+  width: 100%;
+  margin-bottom: 20px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -25,7 +25,7 @@ const auth = async (req,res,next)=>{
         req.user = user
         next()
     } catch (error) {
-        res.status(401).send({error: 'please authenticate'})
+        res.render('404',{err_msg: 'Treść dostępna tylko dla zalogowanych użytkowników'})
     }
 }
 
