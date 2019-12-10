@@ -84,6 +84,10 @@ body {
   cursor: pointer;
 }
 
+.header__btnbox-btn--red {
+  background-color: #a31010;
+}
+
 /* Footer */
 .footer {
   background-color: #003c82;
@@ -128,11 +132,28 @@ body {
 }
 
 .main__msg-box-msg {
-  color: green;
+  color: green !important;
 }
 
 .main__msg-box-err {
-  color: #a31010;
+  color: #a31010 !important;
+}
+
+.main-msg-box {
+  width: 90%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.main-msg-box-msg {
+  color: green !important;
+}
+
+.main-msg-box-err {
+  color: #a31010 !important;
 }
 
 .main__post {
@@ -257,6 +278,10 @@ body {
   cursor: pointer;
 }
 
+.main__panel-btnbox-btn--red {
+  background-color: #a31010;
+}
+
 .main__loginbox {
   width: 20%;
   min-width: 320px;
@@ -269,9 +294,19 @@ body {
   padding: 50px 40px;
   position: relative;
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.main__loginbox__avatar-img {
+.main__loginbox-avatar-img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -280,14 +315,82 @@ body {
   left: calc(50% - 50px);
 }
 
-.main__loginbox p {
+.main__loginbox__msg-box {
+  width: 90%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+.main__loginbox__msg-box-msg {
+  color: green !important;
+}
+
+.main__loginbox__msg-box-err {
+  color: #a31010 !important;
+}
+
+.main__loginbox-msg-box {
+  width: 90%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.main__loginbox-msg-box-msg {
+  color: green !important;
+}
+
+.main__loginbox-msg-box-err {
+  color: #a31010 !important;
+}
+
+.main__loginbox-title {
+  font-size: 2rem;
+}
+
+.main__loginbox-p {
   margin: 0;
   padding: 0;
   font-weight: bold;
 }
 
-.main__loginbox input {
+.main__loginbox-input {
+  margin-top: 10px;
+  border-radius: 15px;
+  padding: 10px 0;
   width: 100%;
   margin-bottom: 20px;
+}
+
+.main__loginbox-submit {
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: white;
+}
+
+.main__loginbox-submit:hover {
+  cursor: pointer;
+  background-color: #498fdf;
+}
+
+.main__loginbox-link {
+  color: white;
+  margin-top: 10px;
+}
+
+.main__loginbox-link:hover {
+  color: #003c82;
+}
+
+.main__title {
+  font-size: 2.3rem;
+  text-align: center;
+}
+
+.main--bgc-off {
+  background-color: rgba(0, 0, 0, 0);
 }
 /*# sourceMappingURL=style.css.map */

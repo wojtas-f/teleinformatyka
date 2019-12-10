@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Panel Użytkownika</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
 
@@ -41,19 +41,41 @@
         </div>
         <div class="main__panel-btnbox">
             <form action="/users/logoutall" method='post' class="main__panel-btnbox-btn" onsubmit="return confirmLogoutAll()">
-                <input type="submit" value="Wyloguj ze wszystkich urządzeń" class="main__panel-btnbox-btn-submit">
+                <input type="submit" value="Wyloguj ze wszystkich urządzeń" class="main__panel-btnbox-btn-submit main__panel-btnbox-btn--red">
             </form>
             <form action="/users/remove" method='post' class="header__panel-btnbox-btn" onsubmit="return confirmRemove()">
-                <input type="submit" value="Usuń konto" class="main__panel-btnbox-btn-submit">
+                <input type="submit" value="Usuń konto" class="main__panel-btnbox-btn-submit main__panel-btnbox-btn--red">
             </form>
         </div>
+        <h2 class="main__title">Twoje tematy</h2>
+        <table class="main__table">
+                <tr>
+                    <th>Index</th>
+                    <th>Tytuł</th>
+                    <th>Opis</th>
+                    <th>Poziom</th>
+                    <th>Zarezerwowany</th>
+                    <th>Data</th>
+
+                </tr>
+            {{#each list}}
+                <tr>
+                    <td class="main__table-count"></td>
+                    <td>{{this.title}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.level}}</td>
+                    <td>{{this.reservationStatus}}</td>
+                    <td>{{this.createdAt}}</td>
+                </tr>
+            {{/each}}
+        </table>
 
 
 
 
     </div>
 
-    {{>footer}}
+    
     <script src="/js/confirm.js"></script>
 </body>
 

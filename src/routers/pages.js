@@ -6,6 +6,7 @@
 const express = require('express')
 const auth = require('../middleware/auth')
 const logged = require('../middleware/logged')
+const Topic = require('../models/topic')
 const router = new express.Router()
 
 /**
@@ -26,7 +27,7 @@ router.get('', (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/login',logged, (req, res) => {
+router.get('/login', logged, (req, res) => {
     res.render('login')
 })
 
@@ -37,7 +38,7 @@ router.get('/login',logged, (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/register',logged, (req, res) => {
+router.get('/register', logged, (req, res) => {
     res.render('register')
 })
 
@@ -48,16 +49,17 @@ router.get('/register',logged, (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/topic',auth, (req, res) => {
+router.get('/topic', auth, (req, res) => {
     res.render('addtopic')
 })
 
 /**
  * Do usunięcia
  */
-router.get('/panel',auth, (req, res) => {
+router.get('/panel', auth, async (req, res) => {
     const user = req.user
-    res.render('panel',{user})
+    const list = await Topic.find({ owner: user._id })
+    res.render('panel', { user, list })
 })
 
 /**

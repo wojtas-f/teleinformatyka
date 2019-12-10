@@ -15,29 +15,30 @@
 
 <body>
     {{>header}}
-    <div class="main">
-        <div class="main__msg-box">
-            <p class="main__msg-box-msg">{{msg}}</p>
-            <p class="main__msg-box-err">{{err_msg}}</p>
-        </div>
+    <div class="main main--bgc-off">
         <div class="main__loginbox">
-            <img src="img/avatar.png" class="loginbox__avatar-img">
-            <h2>Logowanie</h2>
+            <img src="/img/avatar.png" class="main__loginbox-avatar-img">
+            <h2 class="main__loginbox-title">Logowanie</h2>
+            <div class="main__loginbox-msg-box">
+                <p class="main__loginbox-msg-box-msg">{{msg}}</p>
+                <p class="main__loginbox-msg-box-err">{{err_msg}}</p>
+            </div>
             <form method="POST" action="/users/login">
-                <p class="">E-mail</p>
-                <input type="text" name="email" placeholder="Podaj email">
-                <p>Hasło</p>
-                <input type="password" name="password" placeholder="Podaj hasło">
-                <input type="submit" name="" value="Zaloguj">
+                <p class="main__loginbox-p">E-mail</p>
+                <input type="text" name="email" placeholder="Podaj email" class="main__loginbox-input">
+                <p class="main__loginbox-p">Hasło</p>
+                <input type="password" name="password" placeholder="Podaj hasło" class="main__loginbox-input">
+                <input type="submit" name="" value="Zaloguj" class="main__loginbox-submit">
 
             </form>
-            <a href="/">Zapomniałeś hasła? </a><br>
-            <a href="/register">Nie masz jeszcze konta? </a>
+            <a href="/" class="main__loginbox-link">Zapomniałeś hasła? </a>
+
+            <a href="/register" class="main__loginbox-link">Nie masz jeszcze konta? </a>
 
         </div>
     </div>
 
-    {{>footer}}
+
 
 </body>
 

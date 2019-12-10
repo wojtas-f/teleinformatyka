@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="pl"></html>
+<html lang="pl">
+
+</html>
 <html>
 
 <head>
@@ -9,37 +11,38 @@
     <title>Register</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet">
-    
+
 </head>
 
 <body>
 
     {{>header}}
-    <div class="loginbox">
-        <img src="/img/avatar.png" class="loginbox__avatar-img">
-        <h1>Rejestracja</h1>
-        
-        <div class="main__msg-box" id="errorDisplay">
-            <p class="main__msg-box-msg">{{msg}}</p>
-            <p class="main__msg-box-err">{{err_msg}}</p>
+    <div class="main main--bgc-off">
+        <div class="main__loginbox">
+            <img src="/img/avatar.png" class="main__loginbox-avatar-img">
+            <h2 class="main__loginbox-title">Rejestracja</h2>
+            <div class="main__loginbox-msg-box" id="errorDisplay">
+                <p class="main__loginbox-msg-box-msg">{{msg}}</p>
+                <p class="main__loginbox-msg-box-err">{{err_msg}}</p>
+            </div>
+            <form name="register_form" method="POST" action="/users" onsubmit="return validateRegisterForm()">
+                <p class="main__loginbox-p">Imie i nazwisko</p>
+                <input type="text" name="name" placeholder="Imie i nazwisko" class="main__loginbox-input" required>
+                <p class="main__loginbox-p">Numer albumu</p>
+                <input type="text" name="album" placeholder="Numer albumu" class="main__loginbox-input" required>
+                <p class="main__loginbox-p">E-mail</p>
+                <input type="text" name="email" placeholder="E-mail" class="main__loginbox-input" required>
+                <p class="main__loginbox-p">Hasło</p>
+                <input type="password" name="password" placeholder="Hasło" class="main__loginbox-input" required>
+                <p class="main__loginbox-p">Potwierdź hasło</p>
+                <input type="password" name="rep_password" placeholder="Hasło" class="main__loginbox-input" required>
+                <input type="submit" name="" value="Zarejestruj" class="main__loginbox-submit">
+            </form>
         </div>
-        
-        <form name="register_form" method="POST" action="/users" onsubmit="return validateRegisterForm()">
-            <p>Imie i nazwisko</p>
-            <input type="text" name="name" placeholder="Imie i nazwisko" required>
-            <p>Numer albumu</p>
-            <input type="text" name="album" placeholder="Numer albumu" required>
-            <p>E-mail</p>
-            <input type="text" name="email" placeholder="E-mail" required>
-            <p>Hasło</p>
-            <input type="password" name="password" placeholder="Hasło" required>
-            <p>Potwierdź hasło</p>
-            <input type="password" name="rep_password" placeholder="Hasło" required> 
-            <input type="submit" name="" value="Zarejestruj">
-        </form>
+
     </div>
 
-    {{>footer}}
+    
     <script src="/js/form_validation.js"></script>
 </body>
 

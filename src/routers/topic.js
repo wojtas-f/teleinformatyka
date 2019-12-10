@@ -5,6 +5,8 @@
 
 const express = require('express')
 const Topic = require('../models/topic')
+const User = require('../models/user')
+const auth = require('../middleware/auth')
 const router = new express.Router()
 
 /**
@@ -56,12 +58,13 @@ router.get('/list_params', async (req, res) => {
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.post('/topic', async (req, res) => {
-    const topic = new Topic(req.body)
+router.post('/topic',auth, async (req, res) => {
+    const topic = new Topic({ ...req.body, owner: req.user._id })
+    const author = await User.findOne({ _id: req.user._id})
 
     try {
         await topic.save()
-        res.render('newtopicoverview', { topic })
+        res.render('newtopicoverview', { topic, author: author.name })
     } catch (e) {
         res.status(400).send(e)
     }

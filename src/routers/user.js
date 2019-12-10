@@ -5,6 +5,7 @@
 
 const express = require('express')
 const User = require('../models/user')
+const Topic = require('../models/topic')
 const auth = require('../middleware/auth')
 const { session_name } = require('../session/session')
 const router = new express.Router()
@@ -39,13 +40,16 @@ router.post('/users/login', async (req, res) => {
     let msg = 'Zalogowano poprawnie. Witamy ponownie'
     try {
         const user = await User.findToLogIn(req.body.email, req.body.password)
-
+        
         const token = await user.generateAuthToken()
         req.session.token = token
 
-        res.render('panel',{user, msg})
+        
+        const list = await Topic.find({owner: user._id})
+        
+        res.render('panel',{user, msg, list})
     } catch (error) {
-        res.status(400).send()
+        res.render('login',{err_msg: 'Błędny login lub hasło'})
     }
 })
 
@@ -62,7 +66,7 @@ router.get('/users/me', auth, async (req, res) => {
 })
 
 router.post('/users/remove', auth, async (req, res) => {
-    let msg = 'Ups. Coś poszło nie tak'
+    let err_msg = 'Ups. Coś poszło nie tak'
     try {
         await req.user.remove()
         req.session.destroy(err => {

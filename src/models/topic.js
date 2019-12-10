@@ -41,13 +41,9 @@ const topicSchema = new mongoose.Schema(
             type: Boolean,
             default: true
         },
-        author: {
-            type: String,
-            default: 'Filip Wojtaś'
-        },
         owner: {
             type: mongoose.Schema.Types.ObjectId,
-            //required: true,
+            required: true,
             ref: 'User',
             
         }

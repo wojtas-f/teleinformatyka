@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Task = require('./topic')
+
 /**
  * Schemat mongoose opisujacy użytkownika odwzorowany na kolekcję MongoDB
  * Więcej o schematach w mongoose {@link https://mongoosejs.com/docs/guide.html}
