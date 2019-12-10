@@ -17,11 +17,15 @@ const router = new express.Router()
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('/list', async (req, res) => {
+router.get('/list',auth, async (req, res) => {
     try {
         const list = await Topic.find({})
+        await list.forEach(async element=>{
+            const {name} = await User.findOne({_id: element.owner})
+            element.ownerName = name
+        })
 
-        res.render('list', { topic: list })
+        res.render('list', { list })
     } catch (e) {
         res.status(500).send()
     }

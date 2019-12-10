@@ -40,14 +40,14 @@
                     <th>Data</th>
 
                 </tr>
-            {{#each topic}}
+            {{#each list}}
                 <tr>
                     <td class="main__table-count"></td>
                     <td>{{this.title}}</td>
                     <td>{{this.description}}</td>
                     <td>{{this.level}}</td>
                     <td>{{this.reservationStatus}}</td>
-                    <td>{{author}}</td>
+                    <td>{{this.ownerName}}</td>
                     <td>{{this.createdAt}}</td>
                 </tr>
             {{/each}}
