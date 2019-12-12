@@ -2,7 +2,7 @@ const express = require('express')
 const router = new express.Router()
 
 router.get('/dev',(req,res)=>{
-    res.render('list')
+    res.render('addtopic')
 })
 
 module.exports = router

@@ -172,6 +172,55 @@ body {
   color: #a31010 !important;
 }
 
+.main__add-topic {
+  width: 60%;
+  margin-top: auto;
+  margin-right: auto;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__add-topic-p {
+  font-size: 2rem;
+}
+
+.main__add-topic-input-title {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 90%;
+  border-radius: 15px;
+  padding: 10px 10px;
+}
+
+.main__add-topic-input-desc {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 90%;
+  min-height: 200px;
+  border-radius: 15px;
+  padding: 10px 10px;
+}
+
+.main__add-topic-input-radio-box {
+  margin-bottom: 5px;
+}
+
+.main__add-topic-input-submit {
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: white;
+}
+
 .main__post {
   margin-top: 40px;
   width: 70%;

@@ -20,7 +20,6 @@ const router = new express.Router()
 router.get('', async (req, res) => {
     let logged = false
     if(req.session.token){
-        console.log(req.session.token)
         logged = true
     }
     const post = await Topic.find({}).limit(4).sort({ createdAt: -1}).exec()
@@ -54,7 +53,8 @@ router.get('/register', logged, (req, res) => {
 /**
  * Funkcja renderująca stronę do wprowadzania tematów pracy dyplomowej. Strona dostępna tylko dla zalogowanego użytkownika ze statusem promotora
  * @module PagesRouter
- * @function get_/topic/add
+ * @function topic/add
+ * @method GET
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
@@ -63,7 +63,12 @@ router.get('/topic', auth, (req, res) => {
 })
 
 /**
- * Do usunięcia
+ * Funkcja renderująca panel użytkownika
+ * @module PagesRouter
+ * @function /panel
+ * @method GET
+ * @param {Object} req - Obiekt request (Express)
+ * @param {Object} res - Obiekt response (Express)
  */
 router.get('/panel', auth, async (req, res) => {
     const user = req.user
@@ -75,6 +80,7 @@ router.get('/panel', auth, async (req, res) => {
  * Funkcja renderująca stronę 404
  * @module PagesRouter
  * @function 404
+ * @method GET
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */

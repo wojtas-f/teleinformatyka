@@ -24,27 +24,30 @@
             <p class="main__msg-box-err">{{err_msg}}</p>
         </div>
 
-        <form class="add-topic__form" name="add_topic_form" method="POST" action="/topic"
+        <form class="main__add-topic" name="add_topic_form" method="POST" action="/topic"
             onsubmit="return validateRegisterForm()">
-            <p>Temat pracy:</p>
-            <input type="text" name="title" placeholder="Tytuł pracy dyplomowej 10-100 słów" required>
 
-            <p>Opis pracy:</p>
-                <textarea name="description" placeholder="Opis pracy dyplomowej 20-1000 znaków" rows="4"
-                    required></textarea>
-                <input type="hidden" name="author" value="Janusz Korwin-Mikke">
-            <div class="add-topic__form-radiobox">
-                <input type="radio" name="level" value="engineer" checked="checked" class="add-topic__form-radiobox-dot"
+            <p class="main__add-topic-p">Temat pracy:</p>
+            <input type="text" name="title" rows="4" placeholder="Tytuł pracy dyplomowej 10-100 słów" class="main__add-topic-input-title" required>
+
+            <p class="main__add-topic-p">Opis pracy:</p>
+                <textarea name="description" placeholder="Opis pracy dyplomowej 20-1000 znaków" class="main__add-topic-input-desc" required></textarea>
+
+            <p class="main__add-topic-p">Poziom pracy dyplomowej:</p>
+            <div class="main__add_topic-input-radio-box">
+
+                <input type="radio" name="level" value="engineer" checked="checked" class="main__add-topic-input-radio-box-dot"
                     required>
-                <label for="engineer">Inżynier</label>
+                <label for="engineer" class="main__add-topic-input-radio-box-label">Inżynier</label>
             </div>
-            <div class="add-topic__form-radiobox">
-                <input type="radio" name="level" value="master" class="add-topic__form-radiobox-dot" required>
-                <label for="master">Magister</label>
+
+            <div class="main__add_topic_form-input-radio-box">
+                <input type="radio" name="level" value="master" class="main__add-topic-input-radio-box-dot" required>
+                <label for="master" class="main__add-topic-input-radio-box-label">Magister</label>
             </div>
 
 
-            <input type="submit" name="" value="Dodaj temat pracy">
+            <input type="submit" name="" value="Dodaj temat pracy" class="main__add-topic-input-submit">
         </form>
     </div>
 
