@@ -24,7 +24,7 @@
 
             <div class="main__user-panel-data">
                 <h3 class="main__user-panel-data-title">Profil:</h3>
-                <ul>
+                <ul class="main__user-panel-data-title-list">
                     <li>Imie i nazwisko: {{user.name}}</li>
                     <li>Numer albumu: {{user.album}}</li>
                     <li>Email: {{user.email}}</li>
@@ -40,33 +40,61 @@
             </div>
         </div>
         <div class="main__panel-btnbox">
-            <form action="/users/logoutall" method='post' class="main__panel-btnbox-btn" onsubmit="return confirmLogoutAll()">
-                <input type="submit" value="Wyloguj ze wszystkich urządzeń" class="main__panel-btnbox-btn-submit main__panel-btnbox-btn--red">
+            <form action="/users/logoutall" method='post' class="main__panel-btnbox-btn"
+                onsubmit="return confirmLogoutAll()">
+                <input type="submit" value="Wyloguj ze wszystkich urządzeń"
+                    class="main__panel-btnbox-btn-submit main__panel-btnbox-btn--red">
             </form>
-            <form action="/users/remove" method='post' class="header__panel-btnbox-btn" onsubmit="return confirmRemove()">
-                <input type="submit" value="Usuń konto" class="main__panel-btnbox-btn-submit main__panel-btnbox-btn--red">
+            <form action="/users/remove" method='post' class="header__panel-btnbox-btn"
+                onsubmit="return confirmRemove()">
+                <input type="submit" value="Usuń konto"
+                    class="main__panel-btnbox-btn-submit main__panel-btnbox-btn--red">
             </form>
         </div>
         <h2 class="main__title">Twoje tematy</h2>
         <table class="main__table">
-                <tr>
-                    <th>Index</th>
-                    <th>Tytuł</th>
-                    <th>Opis</th>
-                    <th>Poziom</th>
-                    <th>Zarezerwowany</th>
-                    <th>Data</th>
+            <tr>
+                <th>Index</th>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Poziom</th>
+                <th>Zarezerwowany</th>
+                <th>Data</th>
 
-                </tr>
+            </tr>
             {{#each list}}
-                <tr>
-                    <td class="main__table-count"></td>
-                    <td>{{this.title}}</td>
-                    <td>{{this.description}}</td>
-                    <td>{{this.level}}</td>
-                    <td>{{this.reservationStatus}}</td>
-                    <td>{{this.createdAt}}</td>
-                </tr>
+            <tr>
+                <td class="main__table-count"></td>
+                <td>{{this.title}}</td>
+                <td class="main__table-element-desc">{{this.description}}</td>
+                <td>{{this.level}}</td>
+                <td>{{this.reservationStatus}}</td>
+                <td>{{this.createdAt}}</td>
+                <td class="main__table-element">
+                    <form action="/topic/delete" method="post" class="main__table-element-btn">
+                        <input type="hidden" value="{{this._id}}" name="topicID">
+
+                        <button class="main__table-element-btn-submit main__table-element-btn-submit--red"
+                            type="submit">
+                            Usuń
+
+                        </button>
+                    </form>
+
+                </td>
+                <td class="main__table-element">
+                    <form action="/topic/edit/page" method="post" class="main__table-element-btn">
+                        <input type="hidden" value="{{this._id}}" name="topicID">
+
+                        <button class="main__table-element-btn-submit main__table-element-btn-submit--red"
+                            type="submit">
+
+                            Edytuj
+                        </button>
+                    </form>
+
+                </td>
+            </tr>
             {{/each}}
         </table>
 
@@ -75,7 +103,7 @@
 
     </div>
 
-    
+
     <script src="/js/confirm.js"></script>
 </body>
 

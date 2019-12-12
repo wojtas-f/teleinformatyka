@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+</html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dodaj temat pracy dyplomowej</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <script src="/js/form_validation.js"></script>
+</head>
+
+<body>
+
+    {{>header_dashboard}}
+    <div class="main">
+        <h1>Dodawanie tematu pracy dyplomowej</h1>
+        <div class="main__msg-box" id="errorDisplay">
+            <p class="main__msg-box-msg">{{msg}}</p>
+            <p class="main__msg-box-err">{{err_msg}}</p>
+        </div>
+
+        <form class="main__add-topic" name="add_topic_form" method="POST" action="/topic/edit"
+            onsubmit="return validateRegisterForm()">
+
+            <p class="main__add-topic-p">Temat pracy:</p>
+            <input type="text" name="title" rows="4" value="{{topic.title}}" class="main__add-topic-input-title" required>
+
+            <p class="main__add-topic-p">Opis pracy:</p>
+                <textarea name="description" class="main__add-topic-input-desc" required>{{topic.description}}</textarea>
+
+            <p class="main__add-topic-p">Poziom pracy dyplomowej:</p>
+
+            <div class="main__add_topic-input-radio-box">
+                <input type="radio" name="level" value="engineer" checked="checked" class="main__add-topic-input-radio-box-dot"
+                    required>
+                <label for="engineer" class="main__add-topic-input-radio-box-label">Inżynier</label>
+            </div>
+            <div class="main__add_topic_form-input-radio-box">
+                <input type="radio" name="level" value="master" class="main__add-topic-input-radio-box-dot" required>
+                <label for="master" class="main__add-topic-input-radio-box-label">Magister</label>
+            </div>
+
+            <input type="hidden" value="{{topicID}}" name="topicID">
+
+            <input type="submit" name="" value="Edytuj temat pracy" class="main__add-topic-input-submit">
+        </form>
+    </div>
+
+    
+</body>
+
+</html>

@@ -89,4 +89,46 @@ router.post('/topic',auth, async (req, res) => {
     }
 })
 
+router.post('/topic/delete', auth, async (req,res)=>{ 
+    const _id = req.body.topicID
+    try {
+        const topic = await Topic.findOne({_id})
+        await topic.remove()
+        res.redirect('/panel')
+    } catch (error) {
+        res.render('404',{err_msg: 'Nie udało się usunąć tematu'})
+    }
+})
+
+router.post('/topic/edit/page', auth, async (req,res)=>{
+    const topicID = req.body.topicID
+
+    try {
+        const topic = await Topic.findOne({_id:topicID})
+        res.render('edittopic',{topic,topicID})
+    } catch (error) {
+        res.status(400).send()
+    }
+})
+
+router.post('/topic/edit', auth, async (req,res)=>{
+    const {topicID,title,description,level} = req.body
+    try {
+        // const topic = await Topic.findOne({_id})
+        // topic.updateOne
+        // await task.save()
+
+        //await Topic.findOneAndUpdate(topicID,{title,description,level})
+        //const edited = await Topic.findOne({_id:topicID})
+        console.log('elo')
+        await Topic.findByIdAndUpdate(topicID, {title,description,level}, { new: true, runValidators: true })
+        console.log('elo')
+        res.render('404',{msg: 'Task failde succesfully'})
+    } catch (error) {
+        res.status(400).send()
+    }
+
+
+})
+
 module.exports = router

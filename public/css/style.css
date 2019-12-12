@@ -274,6 +274,16 @@ body {
   padding: 15px;
 }
 
+.main__table-element-desc {
+  white-space: wrap;
+  max-width: 500px;
+  text-overflow: clip;
+  text-overflow: ellipsis;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .main__user-panel {
   width: 60%;
   display: -webkit-box;
