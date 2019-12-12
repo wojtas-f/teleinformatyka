@@ -41,14 +41,29 @@ router.get('/list',auth, async (req, res) => {
  */
 router.get('/list_params', async (req, res) => {
     const author = req.query.author
-
+    
     try {
-        const topic = await Topic.find({ author })
-        if (!topic) {
-            return res.status(404).send()
+        if( !author ){
+            return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
+        }
+        
+
+        const authorID = await User.findOne({name: author})
+        if( !authorID ){
+            return res.render('list',{err_msg: 'Nie znaleziono promotora'})
         }
 
-        res.render('list', { topic })
+        
+        const list = await Topic.find({ owner: authorID._id })
+        await list.forEach(async element=>{
+            const {name} = await User.findOne({_id: element.owner})
+            element.ownerName = name
+        })
+        if (!list) {
+            return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
+        }
+
+        res.render('list', { list })
     } catch (e) {
         res.status(500).send()
     }

@@ -46,6 +46,7 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  padding: 20px;
   -webkit-transform: translate(-20px);
           transform: translate(-20px);
 }
@@ -86,6 +87,21 @@ body {
 
 .header__btnbox-btn--red {
   background-color: #a31010;
+}
+
+@media (max-width: 700px) {
+  .header {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .header__logo {
+    display: none;
+  }
+  .header__btnbox {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
 }
 
 /* Footer */
@@ -157,10 +173,11 @@ body {
 }
 
 .main__post {
-  margin-top: 20px;
-  width: 90%;
+  margin-top: 40px;
+  width: 70%;
   line-height: 1.5rem;
   border-bottom: 1px grey solid;
+  border-right: 1px grey solid;
   padding: 10px 0px;
 }
 
@@ -168,6 +185,24 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   margin: 25px 0;
+  line-height: 2.4rem;
+}
+
+.main__post-news {
+  color: red;
+  font-size: 10px;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.main__post-paragraph {
+  padding-right: 20px;
+}
+
+.main__post-date {
+  color: gray;
+  margin-top: 20px;
+  font-size: 10px;
 }
 
 .main__table {

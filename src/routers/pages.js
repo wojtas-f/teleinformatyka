@@ -12,18 +12,26 @@ const router = new express.Router()
 /**
  * Funkcja renderująca stronę startową
  * @module PagesRouter
- * @function get_/
+ * @function /
+ * @method GET
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
-router.get('', (req, res) => {
-    res.render('index')
+router.get('', async (req, res) => {
+    let logged = false
+    if(req.session.token){
+        console.log(req.session.token)
+        logged = true
+    }
+    const post = await Topic.find({}).limit(4).sort({ createdAt: -1}).exec()
+    res.render('index',{post,logged})
 })
 
 /**
  * Funkcja renderująca stronę logowania
  * @module PagesRouter
- * @function get_/login
+ * @function login
+ * @method GET
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
@@ -34,7 +42,8 @@ router.get('/login', logged, (req, res) => {
 /**
  * Funkcja renderująca stronę rejestracja
  * @module PagesRouter
- * @function get_/register
+ * @function register
+ * @method GET
  * @param {Object} req - Obiekt request (Express)
  * @param {Object} res - Obiekt response (Express)
  */
