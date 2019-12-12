@@ -1,24 +1,10 @@
-/**
- * Moduł opisuje schemat użytkownika i zawiera listę dostępnych parametrów
- * @module UserModel
- */
+
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-/**
- * Schemat mongoose opisujacy użytkownika odwzorowany na kolekcję MongoDB
- * Więcej o schematach w mongoose {@link https://mongoosejs.com/docs/guide.html}
- * @constructor userSchema
- * @property {String} name - Imie użytkownika (required,trim)
- * @property {String} album - Numer albumu użytkownika (required,trim,6-znaków,unique)
- * @property {String} email - Adres email użytkownika (required,unique,trim,lowercase) Musi zawierać stud.prz.edu.pl. Poprawnosć adresu sprawdzana z apomocą valdiatora
- * @property {String} password - Hasło (required,minimum 11 znaków, nie mozę zawierać słów: admin, password lub 12345)
- * @property {Number} age - Wiek użytkownika (default: 0, unrequired,positive number)
- * @property {String} status - Status użytkownika na uczelni
- * @property {Date} date - Data rejestracji użytkownika
- */
+
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -71,12 +57,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         validate(number){
-            // if(!number.isNumeric()){
-            //     throw new Error('Numer telefonu moze zawierac tylko liczby')
-            // }
-            // if (!validator.isEmail(email_string)) {
-            //     throw new Error('Invalid email')
-            // }
             if(!validator.isMobilePhone(number,'pl-PL')){
                 throw new Error('Nieprawidłowy format lub numer telefonu')
             }
@@ -145,15 +125,7 @@ userSchema.statics.findToLogIn = async (email, password) => {
     return user
 }
 
-/**
- * Middleware do szyfrowania hasła przed zapisaniem
- * @module userModel
- * @function pre/save
- * @async
- * @param {Object} req - Obiekt request (Express)
- * @param {Object} res - Obiekt response (Express)
- * @param {Function} next - Funkcja next (Express middleware)
- */
+
 userSchema.pre('save', async function(req, res, next) {
     const user = this
     if (user.isModified('password')) {
@@ -168,7 +140,6 @@ userSchema.pre('save', async function(req, res, next) {
     next()
 })
 
-// pre or post to set if the action will be taken before or after specified event (save, validate, ... see mongoose doc)
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

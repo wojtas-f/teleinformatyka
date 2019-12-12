@@ -27,8 +27,6 @@ Przy tworzeniu projektu wykorzystano:
 * jwtoken
 * handlebars 4.5.3
 * hbs 4.0.6
-* jsdoc 3.6.3
-* better-docs 1.4.7
 * chalk 3.0.0
 * express-session 1.17.0
 _Aktualizacja handlebars do wersi 4.5.3_

@@ -1,7 +1,3 @@
-/**
- * Moduł zawiera endpointy użytkowników
- * @module UserRouter
- */
 
 const express = require('express')
 const User = require('../models/user')
@@ -10,14 +6,6 @@ const auth = require('../middleware/auth')
 const { session_name } = require('../session/session')
 const router = new express.Router()
 
-/**
- * Funkcja dodaje nowego użytkownika
- * @module UserRouter
- * @function post_/users
- * @async
- * @param {Object} req - Obiekt request (Express)
- * @param {Object} res - Obiekt response (Express)
- */
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
     try {
@@ -29,7 +17,6 @@ router.post('/users', async (req, res) => {
             msg: 'Witam na naszej platformie :)'
         })
     } catch (e) {
-        // res.status(400).send(e.errors.email.message)
         res.render('register', {
             err_msg: e.errors.email.message
         })
@@ -53,14 +40,7 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-/**
- * Funkcja zwraca profil z danymi użytkownika
- * @module UserRouter
- * @function get_/users/me
- * @async
- * @param {Object} req - Obiekt request (Express)
- * @param {Object} res - Obiekt response (Express)
- */
+
 router.get('/users/me', auth, async (req, res) => {
     res.send(req.user)
 })
