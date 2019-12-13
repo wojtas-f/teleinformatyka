@@ -89,6 +89,10 @@ body {
   background-color: #a31010;
 }
 
+.header__btnbox-btn-submit--green {
+  background-color: green;
+}
+
 @media (max-width: 700px) {
   .header {
     -webkit-box-pack: center;
@@ -284,6 +288,48 @@ body {
   height: fit-content;
 }
 
+.main__table-element-btn {
+  margin: 0 5px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  text-align: center;
+}
+
+.main__table-element-btn-submit {
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: white;
+}
+
+.main__table-element-btn-submit:hover {
+  cursor: pointer;
+  background-color: #498fdf;
+}
+
+.main__table-element-btn-link {
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.main__table-element-btn-link:hover {
+  background-color: #498fdf;
+  cursor: pointer;
+}
+
+.main__table-element-btn--red {
+  background-color: #a31010;
+}
+
+.main__table-element-btn-submit--green {
+  background-color: green;
+}
+
 .main__user-panel {
   width: 60%;
   display: -webkit-box;
@@ -374,6 +420,10 @@ body {
 
 .main__panel-btnbox-btn--red {
   background-color: #a31010;
+}
+
+.main__panel-btnbox-btn-submit--green {
+  background-color: green;
 }
 
 .main__loginbox {

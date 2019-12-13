@@ -49,9 +49,13 @@
                     <td>{{this.reservationStatus}}</td>
                     <td>{{this.ownerName}}</td>
                     <td>{{this.createdAt}}</td>
+                    {{#if this.stud}}
+                        {{>book_topic}}
+                    {{/if}}
                 </tr>
             {{/each}}
         </table>
+        
     </div>
     
 </body>

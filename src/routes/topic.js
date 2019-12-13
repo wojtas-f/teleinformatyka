@@ -8,14 +8,21 @@ const router = new express.Router()
 
 router.get('/list',auth, async (req, res) => {
     const err_msg = 'Ups coś poszło nie tak'
+    let stud = false
+        if(req.user.status === 'student'){
+            stud = true
+        }
+    
     try {
         const list = await Topic.find({})
         await list.forEach(async element=>{
             const {name} = await User.findOne({_id: element.owner})
             element.ownerName = name
+            element.stud = stud
         })
-
+        
         res.render('list', { list })
+        
     } catch (e) {
         res.render('list',{err_msg})
     }
@@ -24,6 +31,10 @@ router.get('/list',auth, async (req, res) => {
 router.get('/list_params', async (req, res) => {
     const author = req.query.author
     const err_msg = 'Ups coś poszło nie tak'
+    let stud = false
+        if(req.user.status === 'student'){
+            stud = true
+        }
     try {
         if( !author ){
             return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
@@ -40,12 +51,13 @@ router.get('/list_params', async (req, res) => {
         await list.forEach(async element=>{
             const {name} = await User.findOne({_id: element.owner})
             element.ownerName = name
+            element.stud = stud
         })
         if (!list) {
             return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
         }
 
-        res.render('list', { list })
+        res.render('list', { list, isStudent })
     } catch (e) {
         res.render('list',{err_msg})
     }
@@ -108,8 +120,18 @@ router.post('/topic/edit', auth, async (req,res)=>{
     } catch (error) {
         res.render('404',{err_msg: 'Nie udało się zedytowac tematu'})
     }
+})
 
-
+router.post('/topic/book', auth, async (req,res)=>{
+    const {topicID} = req.body
+    try {
+        const user = await User.findOne({_id: req.user._id})
+        user.reservedTopic = topicID
+        user.save()
+        res.redirect('/panel')
+    } catch (error) {
+        res.render('404', {err_msg: 'Ups. Coś poszło nei tak przy rezerwowaniu tematu'})
+    }
 })
 
 module.exports = router

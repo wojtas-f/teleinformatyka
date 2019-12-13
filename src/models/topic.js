@@ -36,5 +36,11 @@ const topicSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
+topicSchema.virtual('topic',{
+    ref: 'User',
+    localField: '_id',
+    foreignField: 'reservedTopic'
+})
+
 const Topic = mongoose.model('Topic', topicSchema)
 module.exports = Topic

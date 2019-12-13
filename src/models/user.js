@@ -80,6 +80,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    reservedTopic: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Topic'
+    },
     tokens: [
         {
             token: {
