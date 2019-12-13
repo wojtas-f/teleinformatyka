@@ -76,6 +76,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: 'student'
     },
+    topicCount: {
+        type: Number,
+        default: 0,
+    },
     tokens: [
         {
             token: {
@@ -93,6 +97,8 @@ userSchema.virtual('topic',{
     localField: '_id',
     foreignField: 'owner'
 })
+
+
 
 userSchema.methods.generateAuthToken = async function() {
     
