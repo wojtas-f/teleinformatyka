@@ -40,11 +40,6 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-
-router.get('/users/me', auth, async (req, res) => {
-    res.send(req.user)
-})
-
 router.post('/users/remove', auth, async (req, res) => {
     let err_msg = 'Ups. Coś poszło nie tak'
     try {

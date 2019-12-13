@@ -5,8 +5,7 @@ const logged = require('../middleware/logged')
 const Topic = require('../models/topic')
 const router = new express.Router()
 
-
-router.get('', async (req, res) => {
+router.get('/', async (req, res) => {
     let logged = false
     if(req.session.token){
         logged = true

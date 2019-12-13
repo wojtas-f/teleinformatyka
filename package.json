@@ -30,6 +30,8 @@
     "mongoose": "^5.7.12",
     "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
+    "swagger-jsdoc": "^3.5.0",
+    "swagger-ui-express": "^4.1.2",
     "validator": "^12.1.0"
   }
 }

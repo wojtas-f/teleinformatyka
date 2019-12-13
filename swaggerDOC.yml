@@ -1,0 +1,281 @@
+openapi: '3.0.2'
+info:
+  title: Serwis reserwacji tematów prac dyplomowych
+  version: '1.1.0'
+servers:
+  - url: https://localhost:3000
+paths:
+  /topic/edit:
+    get:
+      tags: 
+        - topic
+      parameters: 
+        - in: path
+          name: title
+          required: true
+          schema: 
+            type: string
+            minimum: 10
+            maximum: 200
+          description: Tytuł pracy dyplomowej
+        - in: path
+          name: description
+          required: true
+          schema: 
+            type: string
+            minimum: 20
+            maximum: 1500
+          description: Opis pracy dyplomowej
+        - in: path
+          name: level
+          required: true
+          schema: 
+            type: boolean
+          description: Poziom pracy dyplomowje inżynier/magister
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+          description: Id tematu który ma być edytowany
+      description: Edytuje temat o wskazanym id
+      responses:
+        '200':
+          description: Wyświetla stronę z komunikatem o zakończeniu edycji tematu
+        '400':
+          description: Wyświetla stronę z komunikatem o błędzie
+  /topic/edit/page:
+    get:
+      tags:
+        - topic
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+          description: Id tematu który ma być edytowany
+      description: Wyświetla stronę z panelem edycji tematu
+      responses:
+        '200':
+          description: Wyświetla stronę z komunikatem o zakończeniu edycji tematu
+        '400':
+          description: Wyświetla stronę z komunikatem o błędzie
+  /topic/delete:
+    post:
+      tags:
+        - topic
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+          description: Id tematu który ma zostac usunięty
+      description: Usuwa temat pracy dyplomowej
+      responses:
+        '200':
+          description: Przekierowuje na panel użytkownika
+        '400':
+          description: Renderuje stronę z błędem i wyświetla komuniakt (err_msg)
+  /topic/new:
+    post:
+      tags: 
+        - topic
+      parameters: 
+        - in: path
+          name: title
+          required: true
+          schema: 
+            type: string
+            minimum: 10
+            maximum: 200
+          description: Tytuł pracy dyplomowej
+        - in: path
+          name: description
+          required: true
+          schema: 
+            type: string
+            minimum: 20
+            maximum: 1500
+          description: Opis pracy dyplomowej
+        - in: path
+          name: level
+          required: true
+          schema: 
+            type: boolean
+          description: Poziom pracy dyplomowje inżynier/magister
+      description: Dodaje nowy temat pracy dyplomowej
+      responses:
+        '200':
+          description: OK
+  /list_params:
+    get:
+      tags:
+        - topic
+      parameters: 
+        - in: path
+          name: name
+          required: true
+          schema: 
+            type: string
+          description: Imię i nazwisko promotora potrzebne do przeszukania bazy
+      description: Wyświetla listę tematów przypisanych do danego promotora
+      responses:
+        '200':
+          description: Renderuje widok listy, wysyła tematy danego promotora (list)
+        '400':
+          description: Renderuje widok listy i wyświetla komunikat (err_mag)
+  /list:
+    get:
+      tags:
+        - topic
+      description: Wyświetla listę wszystkich tematów zapisanych w bazie
+      responses:
+        '200':
+          description: Renderuje widok listy
+        '400':
+          description: Renderuje widok listy i wyświetla komunikat (err_mag)
+  /users/logoutAll:
+    post:
+      tags:
+        - user
+      description: Wylogowuje użytkownia ze wszystkich urządzeń i usuwa wszystkie tokeny uwierzytelniające przypisane do niego
+      responses:
+        '200':
+          description: Renderuje panel logowania i wyświetla informację (msg) o wylogowaniu ze wszystkich urządzeń
+        '400':
+          description: Renderuje panel użytkownika i wyświetla informację (err_msg) o błędzie
+  /users/logout:
+    post:
+      tags:
+        - user
+      description: Wylogowuje użytkownia z aktualnej sesji i usuwa aktualny token uwierzytelniający
+      responses:
+        '200':
+          description: Przekierowuje do strony z panelem logowania
+        '400':
+          description: Reneruje panel użytkownika z informacją o błedzie(err_msg)
+  /users/remove:
+    post:
+      tags:
+        - user
+      description: Usuwa użytkownika i jego profil
+      responses:
+        '200':
+          description: Przekierowuje użytkownika na stronę logowania
+        '400':
+          description: Reneruje panel użytkownika z informacją o błedzie(err_msg)
+  /users/login:
+    post:
+      tags:
+        - user
+      parameters: 
+        - in: path
+          name: email
+          required: true
+          schema: 
+            type: string
+          description: Adres email użytkownika
+        - in: path
+          name: password
+          required: true
+          schema: 
+            type: string
+            minimum: 11
+          description: Hasło użytkownika
+      description: Logowanie do serwisu
+      responses:
+        '200':
+          description: Renderuje panel użytkownika, wyświetla wiadomość powitalną (msg), informacje o użytkowniku (user) i liste tematów stworzonych przez użytkownika (list)
+        '400':
+          description: Renderuje stronę z paneuem logowania i wyświetla wiadomość o błędzie (err_msg)
+  /users:
+    post:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: 
+            type: string
+          description: Imie i nazwisko użytkownika
+        - in: path
+          name: album
+          required: true
+          schema: 
+            type: string
+            minimum: 6
+            maximum: 6
+          description: Numer albumu użytkownika
+        - in: path
+          name: email
+          required: true
+          schema: 
+            type: string
+          description: Adres email użytkownika
+        - in: path
+          name: password
+          required: true
+          schema: 
+            type: string
+            minimum: 11
+          description: Hasło musi składać się co najmniej z 11 znaków i nie moze zawierać słów takich jak 'password', '12345', 'admin'
+        - in: path
+          name: status
+          required: true
+          schema: 
+            type: string
+          description: Status użytkownika. Dla wszystkich użytkowników status jest ustawiany automatycznie na 'student', jeśli email użytkownika odpowiada schematowi adresu email promotora to status użytkownka zostanie automatycznie zamieniony na 'promotor'
+      description: Dodaje nowego użytkownia
+      responses:
+        '200':
+          description: Renderuje panel nowego użytkownika
+  /*:
+    get:
+      tags:
+        - page
+      description: Wildcard
+      responses:
+        '200':
+          description: Renderuje stronę błędu z komuniaktem
+  /panel:
+    get:
+      tags:
+        - page
+      description: Ścieżka do panelu użytkownika
+      responses:
+        '200':
+          description: Renderuje panel zalogowanego użytkownika
+  /topic:
+    get:
+      tags:
+        - page
+      description: Ścieżka do panelu dodawania nowego tematu
+      responses:
+        '200':
+          description: Renderuje widok zaawierający panel dodawania tematu
+  /register:
+    get:
+      tags:
+        - page
+      description: Ścieżka strony z panelem rejestracyjnym
+      responses:
+        '200':
+          description: Renderuje widok z panelem rejestracyjnym
+  /:
+    get:
+      tags:
+        - page
+      description: Ścieżka strony głónwej
+      responses:
+        '200':
+          description: Renderuje główny widok serwisu
+  /login:
+    get:
+      tags:
+        - page
+      responses: 
+        '200':
+          description: Renderuje widok zawierający panel logowania

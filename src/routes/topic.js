@@ -7,6 +7,7 @@ const router = new express.Router()
 
 
 router.get('/list',auth, async (req, res) => {
+    const err_msg = 'Ups coś poszło nie tak'
     try {
         const list = await Topic.find({})
         await list.forEach(async element=>{
@@ -16,13 +17,13 @@ router.get('/list',auth, async (req, res) => {
 
         res.render('list', { list })
     } catch (e) {
-        res.status(500).send()
+        res.render('list',{err_msg})
     }
 })
 
 router.get('/list_params', async (req, res) => {
     const author = req.query.author
-    
+    const err_msg = 'Ups coś poszło nie tak'
     try {
         if( !author ){
             return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
@@ -46,12 +47,12 @@ router.get('/list_params', async (req, res) => {
 
         res.render('list', { list })
     } catch (e) {
-        res.status(500).send()
+        res.render('list',{err_msg})
     }
 })
 
 
-router.post('/topic',auth, async (req, res) => {
+router.post('/topic/new',auth, async (req, res) => {
     const topic = new Topic({ ...req.body, owner: req.user._id })
     const author = await User.findOne({ _id: req.user._id})
 
@@ -82,7 +83,7 @@ router.post('/topic/edit/page', auth, async (req,res)=>{
         const topic = await Topic.findOne({_id:topicID})
         res.render('edittopic',{topic,topicID})
     } catch (error) {
-        res.status(400).send()
+        res.render('404',{err_msg: 'Ups, coś poszło nie tak'})
     }
 })
 
@@ -92,9 +93,9 @@ router.post('/topic/edit', auth, async (req,res)=>{
         console.log('elo')
         await Topic.findByIdAndUpdate(topicID, {title,description,level}, { new: true, runValidators: true })
         console.log('elo')
-        res.render('404',{msg: 'Task failde succesfully'})
+        res.render('404',{msg: 'Task failed succesfully'})
     } catch (error) {
-        res.status(400).send()
+        res.render('404',{err_msg: 'Nie udało się zedytowac tematu'})
     }
 
 
