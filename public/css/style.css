@@ -85,12 +85,19 @@ body {
   cursor: pointer;
 }
 
-.header__btnbox-btn--red {
+.header__btnbox-btn--red, .header__btnbox-btn-submit--red {
   background-color: #a31010;
+  color: white;
 }
 
 .header__btnbox-btn-submit--green {
   background-color: green;
+  color: white;
+}
+
+.header__btnbox-btn-submit--blue {
+  background-color: #003c82;
+  color: white;
 }
 
 @media (max-width: 700px) {
@@ -276,6 +283,7 @@ body {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 15px;
+  background-color: lightgrey;
 }
 
 .main__table-element-desc {
@@ -286,6 +294,14 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.main__table-element-title {
+  width: 200px !important;
+}
+
+.main__table-element-date {
+  width: 120px !important;
 }
 
 .main__table-element-btn {
@@ -322,12 +338,19 @@ body {
   cursor: pointer;
 }
 
-.main__table-element-btn--red {
+.main__table-element-btn--red, .main__table-element-btn-submit--red {
   background-color: #a31010;
+  color: white;
 }
 
 .main__table-element-btn-submit--green {
   background-color: green;
+  color: white;
+}
+
+.main__table-element-btn-submit--blue {
+  background-color: #003c82;
+  color: white;
 }
 
 .main__user-panel {
@@ -418,12 +441,19 @@ body {
   cursor: pointer;
 }
 
-.main__panel-btnbox-btn--red {
+.main__panel-btnbox-btn--red, .main__panel-btnbox-btn-submit--red {
   background-color: #a31010;
+  color: white;
 }
 
 .main__panel-btnbox-btn-submit--green {
   background-color: green;
+  color: white;
+}
+
+.main__panel-btnbox-btn-submit--blue {
+  background-color: #003c82;
+  color: white;
 }
 
 .main__loginbox {

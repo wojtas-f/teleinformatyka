@@ -65,35 +65,13 @@
             {{#each list}}
             <tr>
                 <td class="main__table-count"></td>
-                <td>{{this.title}}</td>
+                <td class="main__table-element-title">{{this.title}}</td>
                 <td class="main__table-element-desc">{{this.description}}</td>
                 <td>{{this.level}}</td>
                 <td>{{this.reservationStatus}}</td>
-                <td>{{this.createdAt}}</td>
-                <td class="main__table-element">
-                    <form action="/topic/delete" method="post" class="main__table-element-btn">
-                        <input type="hidden" value="{{this._id}}" name="topicID">
-
-                        <button class="main__table-element-btn-submit main__table-element-btn-submit--red"
-                            type="submit">
-                            Usuń
-
-                        </button>
-                    </form>
-
-                </td>
-                <td class="main__table-element">
-                    <form action="/topic/edit/page" method="post" class="main__table-element-btn">
-                        <input type="hidden" value="{{this._id}}" name="topicID">
-
-                        <button class="main__table-element-btn-submit main__table-element-btn-submit--red"
-                            type="submit">
-
-                            Edytuj
-                        </button>
-                    </form>
-
-                </td>
+                <td class="main__table-element-date">{{this.createdAt}}</td>
+                    {{>remove_btn}}
+                    {{>edit_btn}}
             </tr>
             {{/each}}
         </table>

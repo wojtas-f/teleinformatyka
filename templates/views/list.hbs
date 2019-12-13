@@ -43,12 +43,12 @@
             {{#each list}}
                 <tr>
                     <td class="main__table-count"></td>
-                    <td>{{this.title}}</td>
+                    <td class="main__table-element-title">{{this.title}}</td>
                     <td>{{this.description}}</td>
                     <td>{{this.level}}</td>
                     <td>{{this.reservationStatus}}</td>
                     <td>{{this.ownerName}}</td>
-                    <td>{{this.createdAt}}</td>
+                    <td class="main__table-element-date>{{this.createdAt}}</td>
                     {{#if this.stud}}
                         {{>book_topic}}
                     {{/if}}
