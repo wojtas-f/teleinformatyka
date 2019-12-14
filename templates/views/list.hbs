@@ -35,7 +35,6 @@
                     <th>Zarezerwowany</th>
                     <th>Promotor</th>
                     <th>Data</th>
-
                 </tr>
             {{#each list}}
                 <tr>
@@ -45,7 +44,7 @@
                     <td>{{this.level}}</td>
                     <td>{{this.reservationStatus}}</td>
                     <td>{{this.ownerName}}</td>
-                    <td class="main__table-element-date>{{this.createdAt}}</td>
+                    <td class="main__table-element-date">{{this.createdAt}}</td>
                     {{#if this.stud}}
                         {{>book_topic}}
                     {{/if}}

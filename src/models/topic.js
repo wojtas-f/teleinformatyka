@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose')
 
+const User = require('./user')
 
 
 const topicSchema = new mongoose.Schema(
@@ -41,6 +42,30 @@ topicSchema.virtual('topic',{
     localField: '_id',
     foreignField: 'reservedTopic'
 })
+
+topicSchema.statics.prepareFullList = async (stud) => {
+    const list = await Topic.find({})
+    await list.forEach(async element=>{
+            element.stud = stud
+            const {name} = await User.findOne({_id: element.owner})
+            element.ownerName = name
+            
+        })
+    return list
+}
+
+topicSchema.statics.prepareParamsList = async (stud,authorID) => {
+    const list = await Topic.find({ owner: authorID })
+    if(stud){
+        await list.forEach(async element=>{
+            element.stud = stud
+            const {name} = await User.findOne({_id: element.owner})
+            element.ownerName = name
+        })
+    }
+    
+    return list
+}
 
 const Topic = mongoose.model('Topic', topicSchema)
 module.exports = Topic

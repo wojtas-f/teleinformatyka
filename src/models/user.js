@@ -104,35 +104,31 @@ userSchema.virtual('topic',{
 
 
 
-userSchema.methods.generateAuthToken = async function() {
-    
+userSchema.methods.generateAuthToken = async function() { 
     const user = this
-    
-
     const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse')
-    
     user.tokens = user.tokens.concat({ token })
     await user.save()
-    
-
     return token
 }
 
-userSchema.statics.findToLogIn = async (email, password) => {
-    
+userSchema.statics.isStudent = async (student) => {
+    let stud = false
+    if(student === 'student'){
+        stud = true
+    }
+    return stud
+}
 
+userSchema.statics.findToLogIn = async (email, password) => {
     const user = await User.findOne({ email })
-    
     if (!user) {
         throw new Error('Unable to login')
     }
-
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
         throw new Error('Unable to login')
     }
-    
-
     return user
 }
 

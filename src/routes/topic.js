@@ -8,56 +8,36 @@ const router = new express.Router()
 
 router.get('/list',auth, async (req, res) => {
     const err_msg = 'Ups coś poszło nie tak'
-    let stud = false
-        if(req.user.status === 'student'){
-            stud = true
-        }
-    
     try {
-        const list = await Topic.find({})
-        await list.forEach(async element=>{
-            const {name} = await User.findOne({_id: element.owner})
-            element.ownerName = name
-            element.stud = stud
-        })
-        
+        const stud = await User.isStudent(req.user.status)
+        const list = await Topic.prepareFullList(stud)
         res.render('list', { list })
-        
     } catch (e) {
         res.render('list',{err_msg})
     }
 })
 
-router.get('/list_params', async (req, res) => {
+router.get('/list_params',auth, async (req, res) => {
     const author = req.query.author
     const err_msg = 'Ups coś poszło nie tak'
-    let stud = false
-        if(req.user.status === 'student'){
-            stud = true
-        }
     try {
+
+        const stud = await User.isStudent(req.user.status)
         if( !author ){
             return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
         }
-        
 
         const authorID = await User.findOne({name: author})
         if( !authorID ){
             return res.render('list',{err_msg: 'Nie znaleziono promotora'})
         }
 
-        
-        const list = await Topic.find({ owner: authorID._id })
-        await list.forEach(async element=>{
-            const {name} = await User.findOne({_id: element.owner})
-            element.ownerName = name
-            element.stud = stud
-        })
+        const list = await Topic.prepareParamsList(stud,authorID._id)
         if (!list) {
             return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
         }
 
-        res.render('list', { list, isStudent })
+        res.render('list', { list })
     } catch (e) {
         res.render('list',{err_msg})
     }
@@ -71,12 +51,11 @@ router.post('/topic/new',auth, async (req, res) => {
         const author = await User.findOne({ _id: req.user._id})
         author.topicCount = author.topicCount + 1
         author.save()
-        // if(req.user.topicCount >= 1 && req.user.status === 'student'){
-        //     return res.render('panel',{err_msg: 'Student może utworzyć tylko 1 temat'})
-        // }
+
         if( req.user.status === 'student'){
             return res.render('panel',{err_msg: 'Student nie może utworzyć tematów'})
         }
+        
         if(req.user.topicCount >= 4 && req.user.status === 'promotor'){
             return res.render('panel',{err_msg: 'Promotor może utworzyć tylko 4 tematy'})
         }
