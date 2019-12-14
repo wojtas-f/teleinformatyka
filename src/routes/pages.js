@@ -3,6 +3,7 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const logged = require('../middleware/logged')
 const Topic = require('../models/topic')
+const User = require('../models/user')
 const router = new express.Router()
 
 router.get('/', async (req, res) => {
@@ -32,8 +33,9 @@ router.get('/topic', auth, (req, res) => {
 
 router.get('/panel', auth, async (req, res) => {
     const user = req.user
+    const stud = await User.isStudent(req.user.status)
     const list = await Topic.prepareParamsList(0,user._id)
-    res.render('panel', { user, list })
+    res.render('panel', { user, list,stud })
 })
 
 

@@ -20,9 +20,10 @@ router.get('/list',auth, async (req, res) => {
 router.get('/list_params',auth, async (req, res) => {
     const author = req.query.author
     const err_msg = 'Ups coś poszło nie tak'
+    const stud = await User.isStudent(req.user.status)
     try {
 
-        const stud = await User.isStudent(req.user.status)
+        
         if( !author ){
             return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
         }
@@ -37,16 +38,15 @@ router.get('/list_params',auth, async (req, res) => {
             return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
         }
 
-        res.render('list', { list })
+        res.render('list', { list ,stud})
     } catch (e) {
-        res.render('list',{err_msg})
+        res.render('list',{err_msg,stud})
     }
 })
 
 
 router.post('/topic/new',auth, async (req, res) => {
     const topic = new Topic({ ...req.body, owner: req.user._id })
-    
     try {
         const author = await User.findOne({ _id: req.user._id})
         author.topicCount = author.topicCount + 1
@@ -81,8 +81,11 @@ router.post('/topic/delete', auth, async (req,res)=>{
 
 router.post('/topic/edit/page', auth, async (req,res)=>{
     const topicID = req.body.topicID
-
     try {
+        const stud = await User.isStudent(req.user.status)
+        if(stud){
+            return res.render('404',{err_msg: 'Student nie może dodawać nowych tematów'})
+        }
         const topic = await Topic.findOne({_id:topicID})
         res.render('edittopic',{topic,topicID})
     } catch (error) {
@@ -105,6 +108,7 @@ router.post('/topic/book', auth, async (req,res)=>{
     const {topicID} = req.body
     let err_msg 
     const allowed = true
+    const stud = await User.isStudent(req.user.status)
     try {
 
         const user = await User.findOne({_id: req.user._id})
@@ -123,7 +127,7 @@ router.post('/topic/book', auth, async (req,res)=>{
         const list = await Topic.prepareFullList(stud)
 
         if(!allowed){
-            return res.render('list',{list,err_msg})
+            return res.render('list',{list,err_msg,stud})
         }
 
         user.reservedTopic = topicID
@@ -132,11 +136,11 @@ router.post('/topic/book', auth, async (req,res)=>{
         topic.save()
 
 
-        res.render('list',{list,msg: 'Temat został zarezerwowany'})
+        res.render('list',{list,msg: 'Temat został zarezerwowany',stud})
     } catch (error) {
         const stud = await User.isStudent(req.user.status)
         const list = await Topic.prepareFullList(stud)
-        res.render('list',{list,err_msg})
+        res.render('list',{list,err_msg,stud})
     }
 })
 

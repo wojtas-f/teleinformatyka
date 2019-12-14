@@ -28,9 +28,10 @@ router.post('/users/login', async (req, res) => {
     try {
         const user = await User.findToLogIn(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
+        const stud = await User.isStudent(user.status)
         req.session.token = token
         const list = await Topic.prepareParamsList(0,user._id)
-        res.render('panel',{user, msg, list})
+        res.render('panel',{user, msg, list,stud})
     } catch (error) {
         res.render('login',{err_msg: 'Błędny login lub hasło'})
     }
@@ -55,6 +56,7 @@ router.post('/users/remove', auth, async (req, res) => {
 router.post('/users/logout', auth, async (req, res) => {
     let err_msg = 'Ups. Coś poszło nie tak'
     const user = req.user
+    const stud = await User.isStudent(req.user.status)
     try {
         req.user.tokens = req.user.tokens.filter(token => {
             return token.token !== req.token
