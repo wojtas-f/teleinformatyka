@@ -19,10 +19,7 @@
         <div class="main__loginbox">
             <img src="/img/avatar.png" class="main__loginbox-avatar-img">
             <h2 class="main__loginbox-title">Logowanie</h2>
-            <div class="main__loginbox-msg-box">
-                <p class="main__loginbox-msg-box-msg">{{msg}}</p>
-                <p class="main__loginbox-msg-box-err">{{err_msg}}</p>
-            </div>
+            {{>msg_box_login}}
             <form method="POST" action="/users/login">
                 <p class="main__loginbox-p">E-mail</p>
                 <input type="text" name="email" placeholder="Podaj email" class="main__loginbox-input">

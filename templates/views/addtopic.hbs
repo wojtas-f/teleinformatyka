@@ -19,10 +19,7 @@
     {{>header_dashboard}}
     <div class="main">
         <h1>Dodawanie tematu pracy dyplomowej</h1>
-        <div class="main__msg-box" id="errorDisplay">
-            <p class="main__msg-box-msg">{{msg}}</p>
-            <p class="main__msg-box-err">{{err_msg}}</p>
-        </div>
+        {{>msg_box}}
 
         <form class="main__add-topic" name="add_topic_form" method="POST" action="/topic/new"
             onsubmit="return validateRegisterForm()">
