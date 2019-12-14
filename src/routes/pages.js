@@ -32,9 +32,7 @@ router.get('/topic', auth, (req, res) => {
 
 router.get('/panel', auth, async (req, res) => {
     const user = req.user
-    //const list = await Topic.find({ owner: user._id })
     const list = await Topic.prepareParamsList(0,user._id)
-
     res.render('panel', { user, list })
 })
 

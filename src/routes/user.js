@@ -27,12 +27,8 @@ router.post('/users/login', async (req, res) => {
     let msg = 'Zalogowano poprawnie. Witamy ponownie'
     try {
         const user = await User.findToLogIn(req.body.email, req.body.password)
-        
         const token = await user.generateAuthToken()
         req.session.token = token
-
-        
-        //const list = await Topic.find({owner: user._id})
         const list = await Topic.prepareParamsList(0,user._id)
         res.render('panel',{user, msg, list})
     } catch (error) {

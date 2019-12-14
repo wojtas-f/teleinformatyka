@@ -46,7 +46,11 @@
                     <td>{{this.ownerName}}</td>
                     <td class="main__table-element-date">{{this.createdAt}}</td>
                     {{#if this.stud}}
-                        {{>book_topic}}
+                            {{#if this.reservationStatus}}
+                                {{>book_topic_disabled}}
+                            {{else}}
+                                {{>book_topic}}
+                            {{/if}}   
                     {{/if}}
                 </tr>
             {{/each}}

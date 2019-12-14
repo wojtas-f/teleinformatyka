@@ -25,7 +25,7 @@ const topicSchema = new mongoose.Schema(
         },
         reservationStatus: {
             type: Boolean,
-            default: true
+            default: false
         },
         owner: {
             type: mongoose.Schema.Types.ObjectId,
@@ -63,7 +63,6 @@ topicSchema.statics.prepareParamsList = async (stud,authorID) => {
             element.ownerName = name
         })
     }
-    
     return list
 }
 

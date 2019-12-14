@@ -103,13 +103,40 @@ router.post('/topic/edit', auth, async (req,res)=>{
 
 router.post('/topic/book', auth, async (req,res)=>{
     const {topicID} = req.body
+    let err_msg 
+    const allowed = true
     try {
+
         const user = await User.findOne({_id: req.user._id})
+
+        if(user.reservedTopic){
+            err_msg = 'Nie możesz zarezerwować więcej niż jednego tematu'
+            allowed =false
+        }
+
+        const topic = await Topic.findOne({_id: topicID})
+        if(topic.reservationStatus === true){
+            err_msg = 'Ten temat jest już zarezerwowany'
+            allowed = false
+        }
+
+        const list = await Topic.prepareFullList(stud)
+
+        if(!allowed){
+            return res.render('list',{list,err_msg})
+        }
+
         user.reservedTopic = topicID
+        topic.reservationStatus = true
         user.save()
-        res.redirect('/panel')
+        topic.save()
+
+
+        res.render('list',{list,msg: 'Temat został zarezerwowany'})
     } catch (error) {
-        res.render('404', {err_msg: 'Ups. Coś poszło nei tak przy rezerwowaniu tematu'})
+        const stud = await User.isStudent(req.user.status)
+        const list = await Topic.prepareFullList(stud)
+        res.render('list',{list,err_msg})
     }
 })
 
