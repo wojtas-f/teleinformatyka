@@ -57,7 +57,7 @@ topicSchema.statics.prepareFullList = async (stud) => {
 topicSchema.statics.prepareParamsList = async (stud,authorID) => {
     const list = await Topic.find({ owner: authorID })
     if(stud){
-        await list.forEach(async element=>{
+        list.forEach(async element=>{
             element.stud = stud
             const {name} = await User.findOne({_id: element.owner})
             element.ownerName = name

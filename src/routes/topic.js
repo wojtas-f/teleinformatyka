@@ -73,7 +73,10 @@ router.post('/topic/delete', auth, async (req,res)=>{
     try {
         const topic = await Topic.findOne({_id})
         await topic.remove()
-        res.redirect('/panel')
+
+        const list = await Topic.prepareParamsList(stud,user._id)
+        return res.render('panel', { user, list,stud })
+        
     } catch (error) {
         res.render('404',{err_msg: 'Nie udało się usunąć tematu'})
     }
@@ -146,12 +149,11 @@ router.post('/topic/book', auth, async (req,res)=>{
 
 router.post('/topic/drop', auth, async (req,res)=>{
     const {topicID} = req.body
-    console.log(topicID)
+
     const stud = await User.isStudent(req.user.status)
     const user = await User.findOne({_id: req.user._id})
     try {
 
-        console.log(topicID)
         const topic = await Topic.findOne({_id: topicID})
 
         user.reservedTopic = null
@@ -160,7 +162,8 @@ router.post('/topic/drop', auth, async (req,res)=>{
         user.save()
         topic.save()
         
-        return res.render('panel', { user, stud })
+        res.render('panel', { user, stud })
+        
     } catch (error) {
 
         const topic = await Topic.findReserverdTopic(user.reservedTopic)

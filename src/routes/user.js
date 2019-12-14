@@ -30,8 +30,16 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken()
         const stud = await User.isStudent(user.status)
         req.session.token = token
-        const list = await Topic.prepareParamsList(0,user._id)
-        res.render('panel',{user, msg, list,stud})
+        
+
+
+        if(stud){
+            const topic = await Topic.findReserverdTopic(user.reservedTopic)
+            return res.render('panel', { user, topic, stud })
+        }else{
+            const list = await Topic.prepareParamsList(0,user._id)
+            return res.render('panel', { user, list,stud })
+        }
     } catch (error) {
         res.render('login',{err_msg: 'Błędny login lub hasło'})
     }
@@ -39,17 +47,20 @@ router.post('/users/login', async (req, res) => {
 
 router.post('/users/remove', auth, async (req, res) => {
     let err_msg = 'Ups. Coś poszło nie tak'
+    const user = req.user
     try {
         await req.user.remove()
-        req.session.destroy(err => {
+        req.session.destroy(async err => {
             if (err) {
-                return res.render('panel',{user,err_msg})
+                const list = await Topic.prepareParamsList(0,user._id)
+                return res.render('panel', { user, list,stud,err_msg })
             }
         })
         res.clearCookie(session_name)
         res.redirect('/login')
     } catch (error) { 
-        res.render('panel',{user, err_msg})
+        const list = await Topic.prepareParamsList(0,user._id)
+        res.render('panel', { user, list,stud,err_msg })
     }
 })
 
@@ -63,15 +74,17 @@ router.post('/users/logout', auth, async (req, res) => {
         })
         await req.user.save()
         
-        req.session.destroy(err => {
+        req.session.destroy(async err => {
             if (err) {
-                return res.render('panel',{user,err_msg})
+                const list = await Topic.prepareParamsList(0,user._id)
+                return res.render('panel', { user, list,stud,err_msg })
             }
         })
         res.clearCookie(session_name)
         res.redirect('/login')
     } catch (error) {
-        res.render('panel',{user,err_msg})
+        const list = await Topic.prepareParamsList(0,user._id)
+        res.render('panel', { user, list,stud,err_msg })
     }
 })
 
@@ -82,9 +95,10 @@ router.post('/users/logoutall', auth, async (req, res) => {
         req.user.tokens = []
         await req.user.save()
         
-        req.session.destroy(err => {
+        req.session.destroy(async err => {
             if (err) {
-                return res.render('panel',{user,err_msg})
+                const list = await Topic.prepareParamsList(0,user._id)
+                return res.render('panel', { user, list,stud,err_msg })
             }
         })
         res.clearCookie(session_name)
