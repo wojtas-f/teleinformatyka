@@ -1,0 +1,12 @@
+{{#each list}}
+<tr>
+    <td class="main__table-count"></td>
+    <td class="main__table-element-title">{{this.title}}</td>
+    <td class="main__table-element-desc">{{this.description}}</td>
+    <td>{{this.level}}</td>
+    <td>{{this.reservationStatus}}</td>
+    <td class="main__table-element-date">{{this.createdAt}}</td>
+    {{>remove_btn}}
+    {{>edit_btn}}
+</tr>
+{{/each}}

@@ -115,7 +115,7 @@ router.post('/topic/book', auth, async (req,res)=>{
 
         if(user.reservedTopic){
             err_msg = 'Nie możesz zarezerwować więcej niż jednego tematu'
-            allowed =false
+            allowed = false
         }
 
         const topic = await Topic.findOne({_id: topicID})
@@ -141,6 +141,30 @@ router.post('/topic/book', auth, async (req,res)=>{
         const stud = await User.isStudent(req.user.status)
         const list = await Topic.prepareFullList(stud)
         res.render('list',{list,err_msg,stud})
+    }
+})
+
+router.post('/topic/drop', auth, async (req,res)=>{
+    const {topicID} = req.body
+    console.log(topicID)
+    const stud = await User.isStudent(req.user.status)
+    const user = await User.findOne({_id: req.user._id})
+    try {
+        console.log('elo')
+        console.log(topicID)
+        const topic = await Topic.findOne({_id: topicID})
+        console.log('elo1')
+        user.reservedTopic = null
+        console.log('elo2')
+        topic.reservationStatus = false
+        console.log('elo3')
+        user.save()
+        topic.save()
+        return res.render('panel', { user, stud })
+    } catch (error) {
+        console.log('elo5')
+        const topic = await Topic.findReserverdTopic(user.reservedTopic)
+        return res.render('panel', { user, topic, stud })
     }
 })
 

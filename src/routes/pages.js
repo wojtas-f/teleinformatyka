@@ -34,8 +34,15 @@ router.get('/topic', auth, (req, res) => {
 router.get('/panel', auth, async (req, res) => {
     const user = req.user
     const stud = await User.isStudent(req.user.status)
-    const list = await Topic.prepareParamsList(0,user._id)
-    res.render('panel', { user, list,stud })
+    
+    if(stud){
+        const topic = await Topic.findReserverdTopic(user.reservedTopic)
+        return res.render('panel', { user, topic, stud })
+    }else{
+        const list = await Topic.prepareParamsList(stud,user._id)
+        return res.render('panel', { user, list,stud })
+    }
+    //res.render('panel', { user, list,stud })
 })
 
 

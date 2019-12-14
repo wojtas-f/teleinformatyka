@@ -66,5 +66,10 @@ topicSchema.statics.prepareParamsList = async (stud,authorID) => {
     return list
 }
 
+topicSchema.statics.findReserverdTopic = async (reservedID)=>{
+    const topic = await Topic.findOne({_id: reservedID})
+    return topic
+}
+
 const Topic = mongoose.model('Topic', topicSchema)
 module.exports = Topic

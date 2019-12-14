@@ -59,7 +59,7 @@
                 <th>Data</th>
 
             </tr>
-            {{#each list}}
+            {{!-- {{#each list}}
             <tr>
                 <td class="main__table-count"></td>
                 <td class="main__table-element-title">{{this.title}}</td>
@@ -70,7 +70,12 @@
                     {{>remove_btn}}
                     {{>edit_btn}}
             </tr>
-            {{/each}}
+            {{/each}} --}}
+            {{#if list}}
+            {{>panel_list_promotor}}
+            {{else}}
+            {{>panel_list_student}}
+            {{/if}}
         </table>
 
 
