@@ -38,8 +38,8 @@ router.post('/users/login', async (req, res) => {
             return res.render('panel', { user, topic, stud })
         }else{
             const list = await Topic.prepareParamsList(0,user._id)
-            //return res.render('panel', { user, list,stud })
-            return res.status(200).send({user})
+            return res.render('panel', { user, list,stud })
+            //return res.status(200).send({user})
         }
     } catch (error) {
         res.render('login',{err_msg: 'Błędny login lub hasło'})
