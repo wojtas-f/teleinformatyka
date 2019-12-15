@@ -7,17 +7,12 @@ const chalk = require('chalk')
 const userRouter = require('./routes/user')
 const pagesRouter = require('./routes/pages')
 const topicRouter = require('./routes/topic')
-const devRouter = require('./routes/dev')
 const hbs = require('hbs')
 const sesionParams = require('./session/session')
 
-const port = process.env.PORT || 3000
-
-
+const port = process.env.PORT
 
 const app = express()
-
-
 
 app.use(session(sesionParams))
 const publicDirectoryPath = path.join(__dirname, '../public')
@@ -33,8 +28,6 @@ app.use(express.static(publicDirectoryPath))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-
-app.use(devRouter)
 app.use(userRouter)
 app.use(topicRouter)
 

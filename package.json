@@ -4,9 +4,8 @@
   "description": "Projekt na zaliczenie przedmiotu systemy teleinformatyczne",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "doc": "jsdoc -c jsdoc.json",
-    "out": "jsdoc src/app.js"
+    "start": "node src/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js -e js,hbs,css"
   },
   "repository": {
     "type": "git",
@@ -28,10 +27,13 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.12",
-    "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
     "swagger-jsdoc": "^3.5.0",
     "swagger-ui-express": "^4.1.2",
     "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.0.1",
+    "nodemon": "^2.0.2"
   }
 }
