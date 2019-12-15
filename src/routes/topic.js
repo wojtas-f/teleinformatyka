@@ -62,6 +62,7 @@ router.post('/topic/new',auth, async (req, res) => {
         
         await topic.save()
         res.render('newtopicoverview', { topic, author: author.name })
+        //res.status(201).send(topic)
     } catch (e) {
         res.status(400).send(e)
     }

@@ -8,7 +8,7 @@ Projekt wykonany na zaliczenie przedmiotu Systemy teleinformatyczne - Politechni
 
 ## Live preview
 
-https://reservation-system-vulpie.herokuapp.com/
+<https://reservation-system-vulpie.herokuapp.com/>
 
 ### Logowanie na testowe konto promotora
 

@@ -12,10 +12,12 @@ router.post('/users', async (req, res) => {
         await user.save()
         const token = await user.generateAuthToken()
         req.session.token = token
+        res.status(201)
         res.render('panel', {
             name: user.name,
             msg: 'Witam na naszej platformie :)'
         })
+        // res.status(201).send(user)
     } catch (e) {
         res.render('register', {
             err_msg: e.errors.email.message
@@ -31,14 +33,13 @@ router.post('/users/login', async (req, res) => {
         const stud = await User.isStudent(user.status)
         req.session.token = token
         
-
-
         if(stud){
             const topic = await Topic.findReserverdTopic(user.reservedTopic)
             return res.render('panel', { user, topic, stud })
         }else{
             const list = await Topic.prepareParamsList(0,user._id)
-            return res.render('panel', { user, list,stud })
+            //return res.render('panel', { user, list,stud })
+            return res.status(200).send({user})
         }
     } catch (error) {
         res.render('login',{err_msg: 'Błędny login lub hasło'})

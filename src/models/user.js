@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     album: {
-        type: Number,
+        type: String,
         required: true,
         trim: true,
         minlength: 6,
