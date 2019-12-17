@@ -14,6 +14,7 @@ router.post('/users', async (req, res) => {
         req.session.token = token
         res.status(201)
         res.render('panel', {
+            user,
             name: user.name,
             msg: 'Witam na naszej platformie :)'
         })
