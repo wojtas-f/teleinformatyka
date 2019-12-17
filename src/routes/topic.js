@@ -11,7 +11,7 @@ router.get('/list',auth, async (req, res) => {
     try {
         const stud = await User.isStudent(req.user.status)
         const list = await Topic.prepareFullList(stud)
-        res.render('list', { list })
+        res.render('list', {stud, list })
     } catch (e) {
         res.render('list',{err_msg})
     }
