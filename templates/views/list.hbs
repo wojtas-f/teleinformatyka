@@ -32,9 +32,9 @@
                     <th>Tytuł</th>
                     <th>Opis</th>
                     <th>Poziom</th>
-                    <th>Zarezerwowany</th>
+                    {{!-- <th>Zarezerwowany</th> --}}
                     <th>Promotor</th>
-                    <th>Data</th>
+                    {{!-- <th>Data</th> --}}
                 </tr>
             {{#each list}}
                 <tr>
@@ -42,9 +42,9 @@
                     <td class="main__table-element-title">{{this.title}}</td>
                     <td>{{this.description}}</td>
                     <td>{{this.level}}</td>
-                    <td>{{this.reservationStatus}}</td>
+                    {{!-- <td class="main__table-element-status">{{this.reservationStatus}}</td> --}}
                     <td>{{this.ownerName}}</td>
-                    <td class="main__table-element-date">{{this.createdAt}}</td>
+                    {{!-- <td class="main__table-element-date">{{this.createdAt}}</td> --}}
                     {{#if this.stud}}
                             {{#if this.reservationStatus}}
                                 {{>book_topic_disabled}}

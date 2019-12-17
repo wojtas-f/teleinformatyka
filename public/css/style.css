@@ -282,7 +282,7 @@ body {
 .main__table td {
   border: 1px solid black;
   border-collapse: collapse;
-  padding: 15px;
+  padding: 5px;
   background-color: lightgrey;
 }
 
@@ -298,10 +298,6 @@ body {
 
 .main__table-element-title {
   width: 200px !important;
-}
-
-.main__table-element-date {
-  width: 120px !important;
 }
 
 .main__table-element-btn {

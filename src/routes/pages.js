@@ -46,6 +46,11 @@ router.get('/panel', auth, async (req, res) => {
     //res.render('panel', { user, list,stud })
 })
 
+router.get('/dev', async(req,res)=>{
+    const stud = true
+    const list = await Topic.prepareFullList(stud)
+    res.render('list',{list,stud})
+})
 
 router.get('*', (req, res) => {
     res.render('404', { err_msg: '404 Page not found', title: '404' })
