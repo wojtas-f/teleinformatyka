@@ -12,8 +12,11 @@ router.post('/users', async (req, res) => {
         await user.save()
         const token = await user.generateAuthToken()
         req.session.token = token
+        const stud = await User.isStudent(user.status)
         res.status(201)
         res.render('panel', {
+            stud,
+            user,
             name: user.name,
             msg: 'Witam na naszej platformie :)'
         })

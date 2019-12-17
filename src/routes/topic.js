@@ -11,7 +11,7 @@ router.get('/list',auth, async (req, res) => {
     try {
         const stud = await User.isStudent(req.user.status)
         const list = await Topic.prepareFullList(stud)
-        res.render('list', { list })
+        res.render('list', {stud, list })
     } catch (e) {
         res.render('list',{err_msg})
     }
@@ -57,7 +57,9 @@ router.post('/topic/new',auth, async (req, res) => {
         }
         
         if(req.user.topicCount >= 4 && req.user.status === 'promotor'){
-            return res.render('panel',{err_msg: 'Promotor może utworzyć tylko 4 tematy'})
+            const stud = User.isStudent(req.user.status)
+            const list = await Topic.prepareParamsList(stud,author._id)
+            return res.render('panel',{user: author,list,err_msg: 'Promotor może utworzyć tylko 4 tematy'})
         }
         
         await topic.save()
@@ -101,8 +103,10 @@ router.post('/topic/edit', auth, async (req,res)=>{
     const {topicID,title,description,level} = req.body
     try {
         await Topic.findByIdAndUpdate(topicID, {title,description,level}, { new: true, runValidators: true })
-        
-        res.render('404',{msg: 'Task failed succesfully'})
+        const stud = await User.isStudent(req.user.status)
+        const list = await Topic.prepareParamsList(stud,req.user._id)
+
+        res.render('panel',{stud, list, user: req.user,msg: 'Zmiany w temacie zostały wprowadzone'})
     } catch (error) {
         res.render('404',{err_msg: 'Nie udało się zedytowac tematu'})
     }
