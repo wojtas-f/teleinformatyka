@@ -57,7 +57,12 @@ router.post('/topic/new',auth, async (req, res) => {
         }
         
         if(req.user.topicCount >= 4 && req.user.status === 'promotor'){
-            return res.render('panel',{err_msg: 'Promotor może utworzyć tylko 4 tematy'})
+            const stud = User.isStudent(req.user.status)
+            console.log('1')
+            const list = await Topic.prepareParamsList(stud,author._id)
+            console.log('2')
+
+            return res.render('panel',{user: author,list,err_msg: 'Promotor może utworzyć tylko 4 tematy'})
         }
         
         await topic.save()
