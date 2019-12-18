@@ -25,22 +25,28 @@
         <hr>
         <table class="main__table">
                 <tr>
-                    <th>Index</th>
-                    <th>Tytuł</th>
-                    <th>Opis</th>
-                    <th>Poziom</th>
+                    <th class="main__table-header_element">Index</th>
+                    <th class="main__table-header_element">Tytuł</th>
+                    <th class="main__table-header_element">Opis</th>
+                    <th class="main__table-header_element">Poziom</th>
                     {{!-- <th>Zarezerwowany</th> --}}
-                    <th>Promotor</th>
+                    <th class="main__table-header_element"Promotor</th>
                     {{!-- <th>Data</th> --}}
                 </tr>
             {{#each list}}
                 <tr>
                     <td class="main__table-count"></td>
-                    <td class="main__table-element-title">{{this.title}}</td>
+                    <td class="main__table-element_title">{{this.title}}</td>
                     <td>{{this.description}}</td>
-                    <td>{{this.level}}</td>
+                    <td class="main__table-element_level">
+
+                        {{this.level}}
+                    </td>
                     {{!-- <td class="main__table-element-status">{{this.reservationStatus}}</td> --}}
-                    <td>{{this.ownerName}}</td>
+                    <td class="main__table-element_promotor">
+                        
+                        {{this.ownerName}}
+                    </td>
                     {{!-- <td class="main__table-element-date">{{this.createdAt}}</td> --}}
                     {{#if this.stud}}
                             {{#if this.reservationStatus}}
