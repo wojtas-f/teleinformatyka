@@ -10,10 +10,7 @@ const testStudent = {
     name: 'Padawan Student',
     album: '111111',
     email: '111111@stud.prz.edu.pl',
-    password: '111111111111',
-    tokens: [{
-        token: jwt.sign({_id: testStudentId }, process.env.JWT_SECRET)
-    }]
+    password: '111111111111'
 }
 
 const testPromotor = {
@@ -21,10 +18,7 @@ const testPromotor = {
     name: 'Darth Promotor',
     album: '000000',
     email: '000000@prz.edu.pl',
-    password: '000000000000',
-    tokens: [{
-        token: jwt.sign({_id: testPromotorId }, process.env.JWT_SECRET)
-    }]
+    password: '000000000000'
 }
 
 

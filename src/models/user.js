@@ -17,7 +17,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: 6,
-        maxlength: 6
+        maxlength: 6,
+        validate(album){
+            if(!validator.isNumeric(album)){
+                throw new Error('Błędny numer albumu. Numer może zawierać tylko cyfry')
+            }
+        }
     },
     email: {
         type: String,
@@ -32,7 +37,7 @@ const userSchema = new mongoose.Schema({
                 !email_string.includes('stud.prz.edu.pl') &&
                 !email_string.includes('prz.edu.pl')
             ) {
-                throw new Error('This is not an university email')
+                throw new Error('To nie jest uczelniany adres email')
             }
         }
     },
@@ -43,7 +48,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         validate(pswd) {
             if (pswd.toLowerCase().includes('password')) {
-                throw new Error('Password cannot contain phrase "password"')
+                throw new Error('Hało nie moze zawierać frazy"password"')
             }
             if (
                 pswd.toLowerCase().includes('admin') ||
@@ -67,7 +72,7 @@ const userSchema = new mongoose.Schema({
         default: 0,
         validate(value) {
             if (value < 0) {
-                throw new Error('Age must be a positive number')
+                throw new Error('Wiek musi być liczbą dodatnią')
             }
         }
     },

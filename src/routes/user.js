@@ -20,12 +20,12 @@ router.post('/users', async (req, res) => {
             name: user.name,
             msg: 'Witam na naszej platformie :)'
         })
-        // res.status(201).send(user)
     } catch (e) {
         res.render('register', {
-            err_msg: e.errors.email.message
+            err_msg: e.message
         })
     }
+
 })
 
 router.post('/users/login', async (req, res) => {
