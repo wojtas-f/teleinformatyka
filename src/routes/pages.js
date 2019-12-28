@@ -15,7 +15,18 @@ router.get('/', async (req, res) => {
     res.render('index',{post,logged})
 })
 
-
+/**
+ * @swagger
+ *
+ * /login:
+ *      post:
+ *          tags:
+ *              - pages
+ *          description: Otwiera widok logowania
+ *          responses:
+ *              201:
+ *                  description: Renderuje widok logowania
+ */
 router.get('/login', logged, (req, res) => {
     res.render('login')
 })
