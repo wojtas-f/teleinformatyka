@@ -143,6 +143,11 @@ userSchema.pre('save', async function(req, res, next) {
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
     }
+    next()
+})
+
+userSchema.pre('save', async function(req, res, next) {
+    const user = this
     if (
         !user.email.includes('stud.prz.edu.pl') &&
         user.email.includes('prz.edu.pl')
@@ -151,7 +156,6 @@ userSchema.pre('save', async function(req, res, next) {
     }
     next()
 })
-
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

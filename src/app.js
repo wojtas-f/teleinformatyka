@@ -32,5 +32,4 @@ app.use(topicRouter)
 
 app.use(pagesRouter) // Contains wildcard. Must be used as the last one
 
-console.log('elo')
 module.exports = app
