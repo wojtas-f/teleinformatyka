@@ -6,6 +6,7 @@ const session = require('express-session')
 const userRouter = require('./routes/user')
 const pagesRouter = require('./routes/pages')
 const topicRouter = require('./routes/topic')
+const Swagger = require('./swaggercfg')
 const hbs = require('hbs')
 const sesionParams = require('./session/session')
 
@@ -25,6 +26,7 @@ app.use(express.static(publicDirectoryPath))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.use(Swagger)
 app.use(userRouter)
 app.use(topicRouter)
 
