@@ -29,6 +29,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/login', logged, (req, res) => {
     res.render('login')
+    console.log('Tets')
 })
 
 
