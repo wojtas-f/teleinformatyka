@@ -43,6 +43,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/pages/login', logged, (req, res) => {
     res.render('login')
+    console.log('Tets')
 })
 
 /**
