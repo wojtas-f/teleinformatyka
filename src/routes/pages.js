@@ -180,6 +180,34 @@ router.get('/pages/list_params',auth, async (req, res) => {
 /**
  * @swagger
  *
+ * /pages/edit_topic:
+ *      post:
+ *          tags:
+ *              - pages
+ *          description: Edytowanie tematu pracy dyplomowej
+ *          responses:
+ *              200:
+ *                  description: Treść tematu została poprawnie zmodyfikowana
+ *              400:
+ *                  description: Nie udało się wprowadzić modyfikacji
+ */
+router.post('/pages/edit_topic', auth, async (req,res)=>{
+    const topicID = req.body.topicID
+    try {
+        const stud = await User.isStudent(req.user.status)
+        if(stud){
+            return res.render('404',{err_msg: 'Student nie może dodawać nowych tematów'})
+        }
+        const topic = await Topic.findOne({_id:topicID})
+        res.render('edittopic',{topic,topicID})
+    } catch (error) {
+        res.render('404',{err_msg: 'Ups, coś poszło nie tak'})
+    }
+})
+
+/**
+ * @swagger
+ *
  * /*:
  *      get:
  *          tags:

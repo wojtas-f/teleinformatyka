@@ -5,7 +5,20 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
-
+/**
+ * @swagger
+ *
+ * /topic/new:
+ *      post:
+ *          tags:
+ *              - topic
+ *          description: Dodawanie nowego tematu pracy dyplomowej
+ *          responses:
+ *              201:
+ *                  description: Nowy temat został dodany poprawnie
+ *              400:
+ *                  description: Nie udało się utworzyć nowego tematu
+ */
 router.post('/topic/new',auth, async (req, res) => {
     const topic = new Topic({ ...req.body, owner: req.user._id })
     try {
@@ -25,13 +38,25 @@ router.post('/topic/new',auth, async (req, res) => {
         
         await topic.save()
         res.render('newtopicoverview', { topic, author: author.name })
-        //res.status(201).send(topic)
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
-
+/**
+ * @swagger
+ *
+ * /topic/delete:
+ *      post:
+ *          tags:
+ *              - topic
+ *          description: Usuwanie tematu pracy dyplomowej
+ *          responses:
+ *              200:
+ *                  description: Temat został poprawnie usunięty
+ *              400:
+ *                  description: Nie udało się usunąć tematu
+ */
 router.post('/topic/delete', auth, async (req,res)=>{ 
     const _id = req.body.topicID
     try {
@@ -46,20 +71,21 @@ router.post('/topic/delete', auth, async (req,res)=>{
     }
 })
 
-router.post('/topic/edit/page', auth, async (req,res)=>{
-    const topicID = req.body.topicID
-    try {
-        const stud = await User.isStudent(req.user.status)
-        if(stud){
-            return res.render('404',{err_msg: 'Student nie może dodawać nowych tematów'})
-        }
-        const topic = await Topic.findOne({_id:topicID})
-        res.render('edittopic',{topic,topicID})
-    } catch (error) {
-        res.render('404',{err_msg: 'Ups, coś poszło nie tak'})
-    }
-})
 
+/**
+ * @swagger
+ *
+ * /topic/edit:
+ *      post:
+ *          tags:
+ *              - topic
+ *          description: Edytowanie tematu pracy dyplomowej
+ *          responses:
+ *              200:
+ *                  description: Treść tematu została poprawnie zmodyfikowana
+ *              400:
+ *                  description: Nie udało się wprowadzić modyfikacji
+ */
 router.post('/topic/edit', auth, async (req,res)=>{
     const {topicID,title,description,level} = req.body
     try {
@@ -73,6 +99,20 @@ router.post('/topic/edit', auth, async (req,res)=>{
     }
 })
 
+/**
+ * @swagger
+ *
+ * /topic/book:
+ *      post:
+ *          tags:
+ *              - topic
+ *          description: Rezerwowanie tematu pracy dyplomowej
+ *          responses:
+ *              200:
+ *                  description: Temat został poprawnie zarezerwowany
+ *              400:
+ *                  description: Nie udało się zarezerwować tematu
+ */
 router.post('/topic/book', auth, async (req,res)=>{
     const {topicID} = req.body
     let err_msg 
@@ -113,6 +153,20 @@ router.post('/topic/book', auth, async (req,res)=>{
     }
 })
 
+/**
+ * @swagger
+ *
+ * /topic/drop:
+ *      post:
+ *          tags:
+ *              - topic
+ *          description: Usuwanie tematu pracy dyplomowej
+ *          responses:
+ *              200:
+ *                  description: Temat został poprawnie usunięty
+ *              400:
+ *                  description: Nie udało się usunąć tematu
+ */
 router.post('/topic/drop', auth, async (req,res)=>{
     const {topicID} = req.body
 
