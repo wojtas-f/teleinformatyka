@@ -39,40 +39,21 @@ hasło: '222222222222'
 
 ### Przy tworzeniu projektu wykorzystano
 
-#### dependencies
-
-    "bcryptjs": "^2.4.3",
-    "chalk": "^3.0.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.0",
-    "handlebars": "^4.5.3",
-    "hbs": "^4.0.6",
-    "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.3.4",
-    "mongoose": "^5.7.12",
-    "prettier": "^1.19.1",
-    "validator": "^12.1.0"
-  
-#### devDependencies
-
-    "env-cmd": "^10.0.1",
-    "nodemon": "^2.0.2"
+![Fromatowanie kodu](/public/img/deps.png)
 
 ---
 
 ## Dokumentacja
 
-Dokumentacja projektu wykonana za pomocą JSDoc.
-
-PLACEHOLDER
+* swagger
+* swagger-jsdoc
+* swagger-ui-express
 
 ---
 
 ## Styl formatowania kodu
 
-* No semicolon
-* Single quote
-* No trailing comma
+![Fromatowanie kodu](/public/img/prettier_cfg.png)
 
 ---
 
