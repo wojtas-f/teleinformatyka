@@ -80,9 +80,3 @@ PLACEHOLDER
 
 * Metodologia BEM
 * Nazwy elementów zawierają zagnieżdżenia
-
-### Przykład
-
-class="main__post-paragraph"
-
-Element _paragraph_ wewnątrz elementu _post_ należący do bloku _main_
