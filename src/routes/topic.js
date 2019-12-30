@@ -6,45 +6,6 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 
 
-router.get('/list',auth, async (req, res) => {
-    const err_msg = 'Ups coś poszło nie tak'
-    try {
-        const stud = await User.isStudent(req.user.status)
-        const list = await Topic.prepareFullList(stud)
-        res.render('list', {stud, list })
-    } catch (e) {
-        res.render('list',{err_msg})
-    }
-})
-
-router.get('/list_params',auth, async (req, res) => {
-    const author = req.query.author
-    const err_msg = 'Ups coś poszło nie tak'
-    const stud = await User.isStudent(req.user.status)
-    try {
-
-        
-        if( !author ){
-            return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
-        }
-
-        const authorID = await User.findOne({name: author})
-        if( !authorID ){
-            return res.render('list',{err_msg: 'Nie znaleziono promotora'})
-        }
-
-        const list = await Topic.prepareParamsList(stud,authorID._id)
-        if (!list) {
-            return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
-        }
-
-        res.render('list', { list ,stud})
-    } catch (e) {
-        res.render('list',{err_msg,stud})
-    }
-})
-
-
 router.post('/topic/new',auth, async (req, res) => {
     const topic = new Topic({ ...req.body, owner: req.user._id })
     try {

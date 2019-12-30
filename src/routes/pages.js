@@ -6,6 +6,20 @@ const Topic = require('../models/topic')
 const User = require('../models/user')
 const router = new express.Router()
 
+
+
+/**
+ * @swagger
+ *
+ * /:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Otwiera główny widok aplikacji
+ *          responses:
+ *              200:
+ *                  description: Renderuje główny widok aplikacji
+ */
 router.get('/', async (req, res) => {
     let logged = false
     if(req.session.token){
@@ -18,31 +32,64 @@ router.get('/', async (req, res) => {
 /**
  * @swagger
  *
- * /login:
- *      post:
+ * /pages/login:
+ *      get:
  *          tags:
  *              - pages
- *          description: Otwiera widok logowania
+ *          description: Widok logowania
  *          responses:
- *              201:
+ *              200:
  *                  description: Renderuje widok logowania
  */
-router.get('/login', logged, (req, res) => {
+router.get('/pages/login', logged, (req, res) => {
     res.render('login')
 })
 
-
-router.get('/register', logged, (req, res) => {
+/**
+ * @swagger
+ *
+ * /pages/register:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Widok rejestracji
+ *          responses:
+ *              200:
+ *                  description: Renderuje widok rejestracji
+ */
+router.get('/pages/register', logged, (req, res) => {
     res.render('register')
 })
 
-
-router.get('/topic', auth, (req, res) => {
+/**
+ * @swagger
+ *
+ * /pages/topic:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Widok dodawania nowego tematu
+ *          responses:
+ *              200:
+ *                  description: widok rejestracji
+ */
+router.get('/pages/topic', auth, (req, res) => {
     res.render('addtopic')
 })
 
-
-router.get('/panel', auth, async (req, res) => {
+/**
+ * @swagger
+ *
+ * /pages/panel:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Widok panelu użytkownika
+ *          responses:
+ *              200:
+ *                  description: Renderuje widok panelu użytkownika
+ */
+router.get('/pages/panel', auth, async (req, res) => {
     const user = req.user
     const stud = await User.isStudent(req.user.status)
     
@@ -63,6 +110,84 @@ router.get('/dev', async(req,res)=>{
     res.render('list',{list,stud})
 })
 
+/**
+ * @swagger
+ *
+ * /pages/list:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Widok listy tematów
+ *          responses:
+ *              200:
+ *                  description: Renderuje widok listy tematów
+ *              400:
+ *                  description: Renderuje widok listy tematów z informacją o błędzie
+ */
+router.get('/pages/list',auth, async (req, res) => {
+    const err_msg = 'Ups coś poszło nie tak'
+    try {
+        const stud = await User.isStudent(req.user.status)
+        const list = await Topic.prepareFullList(stud)
+        res.render('list', {stud, list })
+    } catch (e) {
+        res.render('list',{err_msg})
+    }
+})
+
+/**
+ * @swagger
+ *
+ * /pages/list_params:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Widok listy tematów wyszukanych wedłub parametru
+ *          responses:
+ *              200:
+ *                  description: Renderuje widok listy tematów
+ *              400:
+ *                  description: Renderuje widok listy tematów z informacją o błędzie
+ */
+router.get('/pages/list_params',auth, async (req, res) => {
+    const author = req.query.author
+    const err_msg = 'Ups coś poszło nie tak'
+    const stud = await User.isStudent(req.user.status)
+    try {
+
+        
+        if( !author ){
+            return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
+        }
+
+        const authorID = await User.findOne({name: author})
+        if( !authorID ){
+            return res.render('list',{err_msg: 'Nie znaleziono promotora'})
+        }
+
+        const list = await Topic.prepareParamsList(stud,authorID._id)
+        if (!list) {
+            return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
+        }
+
+        res.render('list', { list ,stud})
+    } catch (e) {
+        res.render('list',{err_msg,stud})
+    }
+})
+
+/**
+ * @swagger
+ *
+ * /*:
+ *      get:
+ *          tags:
+ *              - pages
+ *          description: Widok strony błędu
+ *          responses:
+ *              200:
+ *                  description: Renderuje widok strony błędu
+ */
 router.get('*', (req, res) => {
     res.render('404', { err_msg: '404 Page not found', title: '404' })
 })
