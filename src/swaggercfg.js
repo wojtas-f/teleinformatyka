@@ -5,9 +5,9 @@ const router = new express.Router()
 
 const swaggerDefinition = {
     info: {
-        title: 'Swagger API',
+        title: 'System rezerwacji tematów pracy dyplomowej',
         version: '1.0.0',
-        description: 'Endpoints to test  the swaggerJSDoc and swaggerUi'
+        description: 'Systemy Teleinformatyczne - projekt'
     },
     host: 'localhost:3000',
     basePath: '/',

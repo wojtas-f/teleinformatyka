@@ -6,6 +6,20 @@ const auth = require('../middleware/auth')
 const { session_name } = require('../session/session')
 const router = new express.Router()
 
+/**
+ * @swagger
+ *
+ * /users:
+ *      post:
+ *          tags:
+ *              - user
+ *          description: Dodawanie nowego tematu pracy dyplomowej
+ *          responses:
+ *              201:
+ *                  description: Dodano nowego użytkownika
+ *              400:
+ *                  description: Nie udało się dodać nowego użytkownika
+ */
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
     try {
@@ -28,8 +42,21 @@ router.post('/users', async (req, res) => {
 
 })
 
+/**
+ * @swagger
+ *
+ * /users/login:
+ *      post:
+ *          tags:
+ *              - user
+ *          description: Dodawanie nowego tematu pracy dyplomowej
+ *          responses:
+ *              200:
+ *                  description: Dodano nowego użytkownika
+ *              400:
+ *                  description: Nie udało się dodać nowego użytkownika
+ */
 router.post('/users/login', async (req, res) => {
-    let msg = 'Zalogowano poprawnie. Witamy ponownie'
     try {
         const user = await User.findToLogIn(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
@@ -42,13 +69,26 @@ router.post('/users/login', async (req, res) => {
         }else{
             const list = await Topic.prepareParamsList(0,user._id)
             return res.render('panel', { user, list,stud })
-            //return res.status(200).send({user})
         }
     } catch (error) {
         res.render('login',{err_msg: 'Błędny login lub hasło'})
     }
 })
 
+/**
+ * @swagger
+ *
+ * /users/remove:
+ *      post:
+ *          tags:
+ *              - user
+ *          description: Usuwanie użytkownika
+ *          responses:
+ *              200:
+ *                  description: Użytkownik został usunięty
+ *              400:
+ *                  description: Nie udało się usunąć użytkownika
+ */
 router.post('/users/remove', auth, async (req, res) => {
     let err_msg = 'Ups. Coś poszło nie tak'
     const user = req.user
@@ -68,6 +108,20 @@ router.post('/users/remove', auth, async (req, res) => {
     }
 })
 
+/**
+ * @swagger
+ *
+ * /users/logout:
+ *      post:
+ *          tags:
+ *              - user
+ *          description: Wylogowanie użytkownika z sesji i usunięcie tokenu uwierzytelniającego
+ *          responses:
+ *              200:
+ *                  description: Wylogowano poprawnie
+ *              400:
+ *                  description: Nie udało się wylogować
+ */
 router.post('/users/logout', auth, async (req, res) => {
     let err_msg = 'Ups. Coś poszło nie tak'
     const user = req.user
@@ -92,6 +146,20 @@ router.post('/users/logout', auth, async (req, res) => {
     }
 })
 
+/**
+ * @swagger
+ *
+ * /users/logoutall:
+ *      post:
+ *          tags:
+ *              - user
+ *          description: Wylogowanie użytkownika ze wszystkich sesji i usunięcie listy tokenów uwierzytelniających
+ *          responses:
+ *              200:
+ *                  description: Wylogowano poprawnie
+ *              400:
+ *                  description: Nie udało się wylogować
+ */
 router.post('/users/logoutall', auth, async (req, res) => {
     let err_msg = 'Ups. Coś poszło nie tak'
     const user = req.user
