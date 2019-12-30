@@ -2,7 +2,7 @@
 
 ## Systemy teleinformatyczne - projekt
 
-Projekt wykonany na zaliczenie przedmiotu Systemy teleinformatyczne - Politechnika Rzeszowska im. Ignacego Łukasiewicza
+Projekt wykonany na zaliczenie przedmiotu Systemy teleinformatyczne
 
 ---
 
