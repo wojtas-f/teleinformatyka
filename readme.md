@@ -37,8 +37,6 @@ hasło: '222222222222'
 
 ## Biblioteki / moduły
 
-### Przy tworzeniu projektu wykorzystano
-
 ![Fromatowanie kodu](/public/img/deps.png)
 
 ---
