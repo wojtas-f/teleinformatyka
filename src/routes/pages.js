@@ -1,12 +1,9 @@
-
 const express = require('express')
 const auth = require('../middleware/auth')
 const logged = require('../middleware/logged')
 const Topic = require('../models/topic')
 const User = require('../models/user')
 const router = new express.Router()
-
-
 
 /**
  * @swagger
@@ -22,11 +19,14 @@ const router = new express.Router()
  */
 router.get('/', async (req, res) => {
     let logged = false
-    if(req.session.token){
+    if (req.session.token) {
         logged = true
     }
-    const post = await Topic.find({}).limit(4).sort({ createdAt: -1}).exec()
-    res.render('index',{post,logged})
+    const post = await Topic.find({})
+        .limit(4)
+        .sort({ createdAt: -1 })
+        .exec()
+    res.render('index', { post, logged })
 })
 
 /**
@@ -43,7 +43,6 @@ router.get('/', async (req, res) => {
  */
 router.get('/pages/login', logged, (req, res) => {
     res.render('login')
-    console.log('Tets')
 })
 
 /**
@@ -93,22 +92,21 @@ router.get('/pages/topic', auth, (req, res) => {
 router.get('/pages/panel', auth, async (req, res) => {
     const user = req.user
     const stud = await User.isStudent(req.user.status)
-    
-    if(stud){
+
+    if (stud) {
         const topic = await Topic.findReserverdTopic(user.reservedTopic)
         return res.render('panel', { user, topic, stud })
-    }else{
-        
-        const list = await Topic.prepareParamsList(stud,user._id)
-        return res.render('panel', { user, list,stud })
+    } else {
+        const list = await Topic.prepareParamsList(stud, user._id)
+        return res.render('panel', { user, list, stud })
     }
     //res.render('panel', { user, list,stud })
 })
 
-router.get('/dev', async(req,res)=>{
+router.get('/dev', async (req, res) => {
     const stud = true
     const list = await Topic.prepareFullList(stud)
-    res.render('list',{list,stud})
+    res.render('list', { list, stud })
 })
 
 /**
@@ -125,14 +123,14 @@ router.get('/dev', async(req,res)=>{
  *              400:
  *                  description: Renderuje widok listy tematów z informacją o błędzie
  */
-router.get('/pages/list',auth, async (req, res) => {
+router.get('/pages/list', auth, async (req, res) => {
     const err_msg = 'Ups coś poszło nie tak'
     try {
         const stud = await User.isStudent(req.user.status)
         const list = await Topic.prepareFullList(stud)
-        res.render('list', {stud, list })
+        res.render('list', { stud, list })
     } catch (e) {
-        res.render('list',{err_msg})
+        res.render('list', { err_msg })
     }
 })
 
@@ -150,30 +148,33 @@ router.get('/pages/list',auth, async (req, res) => {
  *              400:
  *                  description: Renderuje widok listy tematów z informacją o błędzie
  */
-router.get('/pages/list_params',auth, async (req, res) => {
+router.get('/pages/list_params', auth, async (req, res) => {
     const author = req.query.author
     const err_msg = 'Ups coś poszło nie tak'
     const stud = await User.isStudent(req.user.status)
     try {
-
-        
-        if( !author ){
-            return res.render('list',{err_msg: 'Musisz podać imię i nazwisko promotora'})
+        if (!author) {
+            return res.render('list', {
+                err_msg: 'Musisz podać imię i nazwisko promotora'
+            })
         }
 
-        const authorID = await User.findOne({name: author})
-        if( !authorID ){
-            return res.render('list',{err_msg: 'Nie znaleziono promotora'})
+        const authorID = await User.findOne({ name: author })
+        if (!authorID) {
+            return res.render('list', { err_msg: 'Nie znaleziono promotora' })
         }
 
-        const list = await Topic.prepareParamsList(stud,authorID._id)
+        const list = await Topic.prepareParamsList(stud, authorID._id)
         if (!list) {
-            return res.render('list',{err_msg: 'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'})
+            return res.render('list', {
+                err_msg:
+                    'Nie znaleziono żadnych tematów. Upewnij się że podałeś poprawne imię i nazwisko promotora'
+            })
         }
 
-        res.render('list', { list ,stud})
+        res.render('list', { list, stud })
     } catch (e) {
-        res.render('list',{err_msg,stud})
+        res.render('list', { err_msg, stud })
     }
 })
 
@@ -191,17 +192,19 @@ router.get('/pages/list_params',auth, async (req, res) => {
  *              400:
  *                  description: Nie udało się wprowadzić modyfikacji
  */
-router.post('/pages/edit_topic', auth, async (req,res)=>{
+router.post('/pages/edit_topic', auth, async (req, res) => {
     const topicID = req.body.topicID
     try {
         const stud = await User.isStudent(req.user.status)
-        if(stud){
-            return res.render('404',{err_msg: 'Student nie może dodawać nowych tematów'})
+        if (stud) {
+            return res.render('404', {
+                err_msg: 'Student nie może dodawać nowych tematów'
+            })
         }
-        const topic = await Topic.findOne({_id:topicID})
-        res.render('edittopic',{topic,topicID})
+        const topic = await Topic.findOne({ _id: topicID })
+        res.render('edittopic', { topic, topicID })
     } catch (error) {
-        res.render('404',{err_msg: 'Ups, coś poszło nie tak'})
+        res.render('404', { err_msg: 'Ups, coś poszło nie tak' })
     }
 })
 
